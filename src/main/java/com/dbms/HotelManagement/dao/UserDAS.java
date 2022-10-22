@@ -16,6 +16,11 @@ public class UserDAS {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    public static void updateActivity(UUID userID, int i) {
+//        TODO set the activity of the user to i.
+    }
+
+
     List<User> selectAllUser(){
         String sql = "SELECT " +
                 " student_id, " +
@@ -32,22 +37,33 @@ public class UserDAS {
         return jdbcTemplate.query(sql, mapUserFromDb());
     }
 
+    public static User findUserByToken(String token) {
+//        TODO Implement Logic.
+        User user = null;
+        return user;
+    }
+    public static boolean alreadyExist(String username){
+//        TODO Implement Logic.
+        return true;
+    }
+
     private RowMapper<User> mapUserFromDb() {
         return (resultSet, i) -> {
             String userIdStr = resultSet.getString("student_id");
+            User user = new User();
 
-            UUID userID = UUID.fromString(userIdStr);
-            String fName = resultSet.getString("first_name");
-            String lName = resultSet.getString("last_name");
-            String pEmail = resultSet.getString("email");
-            String houseNo = resultSet.getString("house_no");
-            String state = resultSet.getString("state");
-            String city = resultSet.getString("city");
-            String country = resultSet.getString("country");
-            String pinCode = resultSet.getString("pin_code");
-            String gender = resultSet.getString("gender").toUpperCase();
+            user.setUserID(UUID.fromString(userIdStr));
+            user.setFname(resultSet.getString("first_name"));
+            user.setLname(resultSet.getString("last_name"));
+            user.setpEmail(resultSet.getString("email"));
+            user.setHouseNo(resultSet.getString("house_no"));
+            user.setState(resultSet.getString("state"));
+            user.setCity(resultSet.getString("city"));
+            user.setCountry(resultSet.getString("country"));
+            user.setPinCode(resultSet.getString("pin_code"));
+            user.setGender(resultSet.getString("gender").toUpperCase());
 
-            return new User(userID, fName, lName, pEmail, houseNo, state, city, country, pinCode, gender);
+            return user;
         };
     }
 }
