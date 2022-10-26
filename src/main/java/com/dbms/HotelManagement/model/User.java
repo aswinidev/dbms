@@ -7,28 +7,13 @@ public class User {
     private String fname;
     private String lname;
     private String pEmail;
-
-    private String password;
+    private String pswd;
     private String houseNo;
     private String state;
     private String city;
     private String country;
     private String pinCode;
     private String gender;
-//
-//    public User(UUID userID, String fname, String lname, String pEmail, String houseNo, String state, String city, String country, String pinCode, String gender, String password) {
-//        this.userID = userID;
-//        this.fname = fname;
-//        this.lname = lname;
-//        this.pEmail = pEmail;
-//        this.houseNo = houseNo;
-//        this.state = state;
-//        this.city = city;
-//        this.country = country;
-//        this.pinCode = pinCode;
-//        this.gender = gender;
-//        this.password = password;
-//    }
 
     public UUID getUserID() {
         return userID;
@@ -110,11 +95,11 @@ public class User {
         this.gender = gender;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPswd() {
+        return pswd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPswd(String pswd) {
+        this.pswd = pswd;
     }
 }
