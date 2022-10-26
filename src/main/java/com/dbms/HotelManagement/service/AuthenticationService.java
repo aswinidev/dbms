@@ -1,15 +1,17 @@
 package com.dbms.HotelManagement.service;
 
+import com.dbms.HotelManagement.model.User;
 import com.dbms.HotelManagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.UUID;
 
 @Service
 public class AuthenticationService {
     private final UserRepository userRepository;
-//    private String SESSION_KEY = "USER_SESSION";
+    private String SESSION_KEY = "USER_SESSION";
 
     @Autowired
     public AuthenticationService(UserRepository userRepository){
@@ -24,6 +26,16 @@ public class AuthenticationService {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public Boolean checkUserCredentials(String pEmail, String password) {
+        User user = userRepository.getUser(pEmail);
+        return user.getPswd().equals(password);
+    }
+
+    public void login(HttpSession session, String pEmail) {
+        session.setAttribute(SESSION_KEY, pEmail);
+        System.out.println(pEmail + "logged in");
     }
 
 //    public Boolean checkUserCredentials(String pEmail, String password) {
