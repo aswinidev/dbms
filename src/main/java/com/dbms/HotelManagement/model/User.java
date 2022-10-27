@@ -14,6 +14,21 @@ public class User {
     private String country;
     private String pinCode;
     private String gender;
+    public  User(){}
+
+    public User(UUID userID, String fname, String lname, String pEmail, String pswd, String houseNo, String state, String city, String country, String pinCode, String gender) {
+        this.userID = userID;
+        this.fname = fname;
+        this.lname = lname;
+        this.pEmail = pEmail;
+        this.pswd = pswd;
+        this.houseNo = houseNo;
+        this.state = state;
+        this.city = city;
+        this.country = country;
+        this.pinCode = pinCode;
+        this.gender = gender;
+    }
 
     public UUID getUserID() {
         return userID;

@@ -5,7 +5,7 @@ import java.util.UUID;
 public class Room {
     private int roomNo;
     private String type;
-    private String price;
+    private float price;
     private String status;
     private int floor;
     private String checkInDate;
@@ -28,11 +28,11 @@ public class Room {
         this.type = type;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 

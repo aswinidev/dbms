@@ -13,6 +13,7 @@ public class RegisterController {
     private final AuthenticationService authenticationService;
 
     @Autowired
+
     public RegisterController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
