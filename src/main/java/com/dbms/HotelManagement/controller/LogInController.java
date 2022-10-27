@@ -3,10 +3,7 @@ package com.dbms.HotelManagement.controller;
 import com.dbms.HotelManagement.model.User;
 import com.dbms.HotelManagement.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +17,7 @@ public class LogInController {
         this.authenticationService = authenticationService;
     }
 
-    @PostMapping("/login/customer")
+    @PostMapping("/login")
     public String customerLogIn(@RequestBody User user, HttpSession session){
         String pEmail = user.getpEmail();
         String pswd = user.getPswd();
@@ -37,6 +34,11 @@ public class LogInController {
             System.out.println(e);
         }
         return "/login";
+    }
 
+    @GetMapping("/logout")
+    public String userLogOut(HttpSession session){
+        authenticationService.logoutUser(session);
+        return "logout";
     }
 }

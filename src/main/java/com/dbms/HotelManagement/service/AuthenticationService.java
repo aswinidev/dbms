@@ -12,7 +12,7 @@ import java.util.UUID;
 public class AuthenticationService {
     private final UserRepository userRepository;
     //    private String SESSION_KEY = "USER_SESSION";
-    private String SESSION_KEY = "USER_SESSION";
+    private final String SESSION_KEY = "USER_SESSION";
 
     @Autowired
     public AuthenticationService(UserRepository userRepository) {
@@ -39,7 +39,15 @@ public class AuthenticationService {
         System.out.println(pEmail + "logged in");
     }
 
-//    public Boolean checkUserCredentials(String pEmail, String password) {
-//        User user = users.getUser(pEmail);
-//        return user.getPassword().equals(password);
+    public String getCurrentUser(HttpSession session) {
+        try {
+            return session.getAttribute(SESSION_KEY).toString();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public void logoutUser(HttpSession session) {
+        session.removeAttribute(SESSION_KEY);
+    }
 }
