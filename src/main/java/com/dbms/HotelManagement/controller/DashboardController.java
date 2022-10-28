@@ -23,9 +23,13 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public User dashboard(HttpSession session){
-        String pEmail = authenticationService.getCurrentUser(session);
-        User user = dashboardService.getDetails(pEmail);
-        return user;
+    public String dashboard(){
+//        try{System.out.println(session.getAttribute("USER_SESSION"));}catch (Exception e){System.out.println(e);}
+//        String pEmail = authenticationService.getCurrentUser(session);
+//        System.out.println(pEmail);
+        return "dashboard";
+//        System.out.println(pEmail);
+//        User user = dashboardService.getDetails(pEmail);
+//        return user;
     }
 }
