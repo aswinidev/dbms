@@ -14,6 +14,7 @@ public class User {
     private String country;
     private String pinCode;
     private String gender;
+    private boolean isEmp;
     public  User(){}
 
     public User(UUID userID, String fname, String lname, String pEmail, String pswd, String houseNo, String state, String city, String country, String pinCode, String gender) {
@@ -29,6 +30,7 @@ public class User {
         this.pinCode = pinCode;
         this.gender = gender;
     }
+
 
     public UUID getUserID() {
         return userID;
@@ -116,5 +118,13 @@ public class User {
 
     public void setPswd(String pswd) {
         this.pswd = pswd;
+    }
+
+    public boolean getIsEmp() {
+        return isEmp;
+    }
+
+    public void setIsEmp(boolean emp) {
+        isEmp = emp;
     }
 }

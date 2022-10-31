@@ -4,10 +4,10 @@ import java.util.UUID;
 
 public class Employee {
     private UUID empID;
-    private String houseNo;
-    private String pincode;
-    private String city;
-    private String state;
+    private String currHouseNo;
+    private String currPincode;
+    private String currCity;
+    private String currState;
     private String maritalStatus;
     private String panCard;
     private String accountNo;
@@ -25,36 +25,36 @@ public class Employee {
         this.empID = empID;
     }
 
-    public String getHouseNo() {
-        return houseNo;
+    public String getCurrHouseNo() {
+        return currHouseNo;
     }
 
-    public void setHouseNo(String houseNo) {
-        this.houseNo = houseNo;
+    public void setCurrHouseNo(String currHouseNo) {
+        this.currHouseNo = currHouseNo;
     }
 
-    public String getPincode() {
-        return pincode;
+    public String getCurrPincode() {
+        return currPincode;
     }
 
-    public void setPincode(String pincode) {
-        this.pincode = pincode;
+    public void setCurrPincode(String currPincode) {
+        this.currPincode = currPincode;
     }
 
-    public String getCity() {
-        return city;
+    public String getCurrCity() {
+        return currCity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCurrCity(String currCity) {
+        this.currCity = currCity;
     }
 
-    public String getState() {
-        return state;
+    public String getCurrState() {
+        return currState;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setCurrState(String currState) {
+        this.currState = currState;
     }
 
     public String getMaritalStatus() {
@@ -120,4 +120,5 @@ public class Employee {
     public void setSuperID(UUID superID) {
         this.superID = superID;
     }
+
 }

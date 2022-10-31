@@ -4,7 +4,6 @@ import java.util.UUID;
 
 public class Customer {
     private UUID customerID;
-    private int numberOfMembers;
     private String alternateEmailAddress;
     private String aadharCardNumber;
     private UUID userID;
@@ -15,14 +14,6 @@ public class Customer {
 
     public void setCustomerID(UUID customerID) {
         this.customerID = customerID;
-    }
-
-    public int getNumberOfMembers() {
-        return numberOfMembers;
-    }
-
-    public void setNumberOfMembers(int numberOfMembers) {
-        this.numberOfMembers = numberOfMembers;
     }
 
     public String getAlternateEmailAddress() {
