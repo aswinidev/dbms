@@ -7,6 +7,9 @@ import com.dbms.HotelManagement.service.AuthenticationService;
 import com.dbms.HotelManagement.service.DashboardService;
 import com.mysql.cj.conf.ConnectionUrlParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +33,9 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public User dashboard(HttpSession session){
-        String pEmail = authenticationService.getCurrentUser(session);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails obj = (UserDetails) auth.getPrincipal();
+        String pEmail = obj.getUsername();
         user = dashboardService.getDetails(pEmail);
         emp = dashboardService.getEmp(user.getUserID());
         if(emp!=null) {
@@ -40,6 +45,20 @@ public class DashboardController {
             user.setIsEmp(false);
         }
         return user;
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("Dashboard: " + auth);
+//        System.out.println("Hello");
+//        try{System.out.println(session.getAttribute("USER_SESSION"));}catch (Exception e){System.out.println(e);}
+//        String pEmail = authenticationService.getCurrentUser(session);
+//        System.out.println(pEmail);
+        return "dashboard";
+//        System.out.println(pEmail);
+//        User user = dashboardService.getDetails(pEmail);
+//        return user;
     }
 
     @GetMapping("/dashboard/employee")
