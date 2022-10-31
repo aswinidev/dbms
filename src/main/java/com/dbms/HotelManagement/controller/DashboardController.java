@@ -47,8 +47,8 @@ public class DashboardController {
         return user;
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard(){
+   @GetMapping("/chutiyadashboard")
+    public String ChutiyaDashboard(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println("Dashboard: " + auth);
 //        System.out.println("Hello");

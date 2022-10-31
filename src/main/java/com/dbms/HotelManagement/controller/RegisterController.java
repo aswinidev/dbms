@@ -3,19 +3,20 @@ package com.dbms.HotelManagement.controller;
 import com.dbms.HotelManagement.model.User;
 import com.dbms.HotelManagement.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class RegisterController {
     private final AuthenticationService authenticationService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
 
-    public RegisterController(AuthenticationService authenticationService) {
+    public RegisterController(AuthenticationService authenticationService, PasswordEncoder passwordEncoder) {
         this.authenticationService = authenticationService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/register")
@@ -23,7 +24,7 @@ public class RegisterController {
         String fname = user.getFname();
         String lname = user.getLname();
         String pEmail = user.getpEmail();
-        String pswd = user.getPswd();
+        String pswd = passwordEncoder.encode(user.getPswd());
         String houseNo = user.getHouseNo();
         String state = user.getState();
         String city = user.getCity();

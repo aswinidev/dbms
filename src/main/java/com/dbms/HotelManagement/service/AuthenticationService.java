@@ -11,8 +11,8 @@ import java.util.UUID;
 @Service
 public class AuthenticationService {
     private final UserRepository userRepository;
-    //    private String SESSION_KEY = "USER_SESSION";
-    private final String SESSION_KEY = "USER_SESSION";
+        private String SESSION_KEY = "USER_SESSION";
+//    private final String SESSION_KEY = "USER_SESSION";
 
     @Autowired
     public AuthenticationService(UserRepository userRepository) {
@@ -32,22 +32,5 @@ public class AuthenticationService {
     public Boolean checkUserCredentials(String pEmail, String password) {
         User user = userRepository.getUser(pEmail);
         return user.getPswd().equals(password);
-    }
-
-    public void login(HttpSession session, String pEmail) {
-        session.setAttribute(SESSION_KEY, pEmail);
-        System.out.println(pEmail + "logged in");
-    }
-
-    public String getCurrentUser(HttpSession session) {
-        try {
-            return session.getAttribute(SESSION_KEY).toString();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public void logoutUser(HttpSession session) {
-        session.removeAttribute(SESSION_KEY);
     }
 }
