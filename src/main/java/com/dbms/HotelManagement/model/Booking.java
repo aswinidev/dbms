@@ -17,8 +17,6 @@ public class Booking {
     private String checkInDate;
     private String checkOutDate;
 
-    private int numberOfMembers;
-
     public UUID getBookingID() {
         return bookingID;
     }
@@ -73,8 +71,6 @@ public class Booking {
 //
 //    public void setDoubleRooms(int doubleRooms) {
 //        this.doubleRooms = doubleRooms;
-public  void setNumberOfMembers(int numberOfMembers){this.numberOfMembers=numberOfMembers;}
-    public int getNumberOfMembers(){return numberOfMembers;}
 }
 
 

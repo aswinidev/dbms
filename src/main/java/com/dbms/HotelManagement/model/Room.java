@@ -12,6 +12,17 @@ public class Room {
 //    private String checkOutDate;
 //    private UUID customerID;
 
+
+    public Room(int roomNo, String type, float price, int floor) {
+        this.roomNo = roomNo;
+        this.type = type;
+        this.price = price;
+        this.floor = floor;
+    }
+
+    public Room() {
+    }
+
     public int getRoomNo() {
         return roomNo;
     }
