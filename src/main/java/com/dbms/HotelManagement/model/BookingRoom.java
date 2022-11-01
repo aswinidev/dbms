@@ -6,6 +6,14 @@ public class BookingRoom {
     private UUID bookingID;
     private int roomNo;
 
+    public BookingRoom(UUID bookingID, int roomNo) {
+        this.bookingID = bookingID;
+        this.roomNo = roomNo;
+    }
+
+    public BookingRoom() {
+    }
+
     public UUID getBookingID() {
         return bookingID;
     }

@@ -14,6 +14,17 @@ public class Booking {
 //    private int doubleRooms;
 //    private int roomNo; separate table containing booking id and room nos as room no is a multi valued attribute here(booking-room)
 
+
+    public Booking() {
+    }
+
+    public Booking(UUID bookingID, UUID customerID, String checkInDate, String checkOutDate) {
+        this.bookingID = bookingID;
+        this.customerID = customerID;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+    }
+
     private String checkInDate;
     private String checkOutDate;
 

@@ -4,11 +4,21 @@ import java.util.UUID;
 
 public class Bill {
     private UUID billID;
-    private UUID customerID;
-    private float discount;
+    private UUID bookingID;
     private float amount;
     private String date;
     private String time;
+
+    public Bill(UUID billID, UUID bookingID, float amount, String date, String time) {
+        this.billID = billID;
+        this.bookingID = bookingID;
+        this.amount = amount;
+        this.date = date;
+        this.time = time;
+    }
+
+    public Bill() {
+    }
 
     public UUID getBillID() {
         return billID;
@@ -18,20 +28,12 @@ public class Bill {
         this.billID = billID;
     }
 
-    public UUID getCustomerID() {
-        return customerID;
+    public UUID getBookingID() {
+        return bookingID;
     }
 
-    public void setCustomerID(UUID customerID) {
-        this.customerID = customerID;
-    }
-
-    public float getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(float discount) {
-        this.discount = discount;
+    public void setBookingID(UUID bookingID) {
+        this.bookingID = bookingID;
     }
 
     public float getAmount() {
