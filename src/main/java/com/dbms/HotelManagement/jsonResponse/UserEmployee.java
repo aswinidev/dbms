@@ -8,6 +8,10 @@ public class UserEmployee {
     private String pincode;
     private String city;
     private String state;
+    private String currHouseNo;
+    private String currPincode;
+    private String currCity;
+    private String currState;
     private String maritalStatus;
     private String panCard;
     private String accountNo;
@@ -21,86 +25,189 @@ public class UserEmployee {
     private String pEmail;
     private String pswd;
     private String country;
-    private String pinCode;
     private String gender;
 
     public UUID getEmpID() {
         return empID;
     }
 
+    public void setEmpID(UUID empID) {
+        this.empID = empID;
+    }
+
     public String getHouseNo() {
         return houseNo;
+    }
+
+    public void setHouseNo(String houseNo) {
+        this.houseNo = houseNo;
     }
 
     public String getPincode() {
         return pincode;
     }
 
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getState() {
         return state;
     }
 
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCurrHouseNo() {
+        return currHouseNo;
+    }
+
+    public void setCurrHouseNo(String currHouseNo) {
+        this.currHouseNo = currHouseNo;
+    }
+
+    public String getCurrPincode() {
+        return currPincode;
+    }
+
+    public void setCurrPincode(String currPincode) {
+        this.currPincode = currPincode;
+    }
+
+    public String getCurrCity() {
+        return currCity;
+    }
+
+    public void setCurrCity(String currCity) {
+        this.currCity = currCity;
+    }
+
+    public String getCurrState() {
+        return currState;
+    }
+
+    public void setCurrState(String currState) {
+        this.currState = currState;
+    }
+
     public String getMaritalStatus() {
         return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
     }
 
     public String getPanCard() {
         return panCard;
     }
 
+    public void setPanCard(String panCard) {
+        this.panCard = panCard;
+    }
+
     public String getAccountNo() {
         return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
     }
 
     public String getIFSCCode() {
         return IFSCCode;
     }
 
+    public void setIFSCCode(String IFSCCode) {
+        this.IFSCCode = IFSCCode;
+    }
+
     public String getBankName() {
         return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public UUID getUserID() {
         return userID;
     }
 
+    public void setUserID(UUID userID) {
+        this.userID = userID;
+    }
+
     public String getDeptName() {
         return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
     }
 
     public String getSuperID() {
         return superID;
     }
 
+    public void setSuperID(String superID) {
+        this.superID = superID;
+    }
+
     public String getFname() {
         return fname;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
     }
 
     public String getLname() {
         return lname;
     }
 
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
     public String getpEmail() {
         return pEmail;
+    }
+
+    public void setpEmail(String pEmail) {
+        this.pEmail = pEmail;
     }
 
     public String getPswd() {
         return pswd;
     }
 
+    public void setPswd(String pswd) {
+        this.pswd = pswd;
+    }
+
     public String getCountry() {
         return country;
     }
 
-    public String getPinCode() {
-        return pinCode;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getGender() {
         return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

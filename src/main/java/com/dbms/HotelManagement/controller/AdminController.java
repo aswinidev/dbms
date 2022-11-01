@@ -53,17 +53,17 @@ public class AdminController {
         String state = userEmployee.getState();
         String city = userEmployee.getCity();
         String country = userEmployee.getCountry();
-        String pinCode = userEmployee.getPinCode();
+        String pinCode = userEmployee.getPincode();
         String gender = userEmployee.getGender();
         authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
         // Employee Details
         // UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID
         Employee employee = new Employee(
                 UUID.randomUUID(),
-                userEmployee.getHouseNo(),
-                userEmployee.getPincode(),
-                userEmployee.getCity(),
-                userEmployee.getState(),
+                userEmployee.getCurrHouseNo(),
+                userEmployee.getCurrPincode(),
+                userEmployee.getCurrCity(),
+                userEmployee.getCurrState(),
                 userEmployee.getMaritalStatus(),
                 userEmployee.getPanCard(),
                 userEmployee.getAccountNo(),

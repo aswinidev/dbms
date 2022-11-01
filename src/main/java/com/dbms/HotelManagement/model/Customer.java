@@ -11,9 +11,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(UUID customerID, int numberOfMembers, String alternateEmailAddress, String aadharCardNumber, UUID userID) {
+    public Customer(UUID customerID, String alternateEmailAddress, String aadharCardNumber, UUID userID) {
         this.customerID = customerID;
-        this.numberOfMembers = numberOfMembers;
         this.alternateEmailAddress = alternateEmailAddress;
         this.aadharCardNumber = aadharCardNumber;
         this.userID = userID;

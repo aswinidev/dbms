@@ -29,7 +29,7 @@ public class AdminService {
 
     public void addEmployee(Employee employee){
 //        UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID
-        employeeRepository.addEmployee(employee.getEmpID(), employee.getHouseNo(), employee.getPincode(), employee.getCity(), employee.getState(), employee.getMaritalStatus(), employee.getPanCard(), employee.getAccountNo(), employee.getIFSCCode(), employee.getBankName(), employee.getUserID(), employee.getDeptName(), employee.getSuperID());
+        employeeRepository.addEmployee(employee.getEmpID(), employee.getCurrHouseNo(), employee.getCurrPincode(), employee.getCurrCity(), employee.getCurrState(), employee.getMaritalStatus(), employee.getPanCard(), employee.getAccountNo(), employee.getIFSCCode(), employee.getBankName(), employee.getUserID(), employee.getDeptName(), employee.getSuperID());
     }
 
     public List<Employee> getEmployees() {

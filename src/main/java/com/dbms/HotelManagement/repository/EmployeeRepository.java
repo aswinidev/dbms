@@ -44,7 +44,7 @@ public class EmployeeRepository {
     }
 
     public void addEmployee(UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID){
-        String sql = "INSERT INTO Employee(empID, houseNo, pincode, city, state, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Employee(empID, currHouseNo, currPincode, currCity, currState, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, empID.toString(), houseNo, pincode, city, state, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID.toString(), deptName, superID.toString());
     }
 
@@ -52,10 +52,10 @@ public class EmployeeRepository {
         return (resultSet, i) -> {
             return new Employee(
                     UUID.fromString(resultSet.getString("empID")),
-                    resultSet.getString("houseNo"),
-                    resultSet.getString("pincode"),
-                    resultSet.getString("city"),
-                    resultSet.getString("state"),
+                    resultSet.getString("currHouseNo"),
+                    resultSet.getString("currPincode"),
+                    resultSet.getString("currCity"),
+                    resultSet.getString("currState"),
                     resultSet.getString("maritalStatus"),
                     resultSet.getString("panCard"),
                     resultSet.getString("accountNo"),
