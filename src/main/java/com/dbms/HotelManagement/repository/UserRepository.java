@@ -56,4 +56,9 @@ public class UserRepository {
             );
         };
     }
+
+    public void removeUser(String pEmail) {
+        String sql = "DELETE FROM User WHERE pEmail = ?";
+        jdbcTemplate.update(sql, pEmail);
+    }
 }

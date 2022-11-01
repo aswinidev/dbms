@@ -10,6 +10,18 @@ public class Feedback {
     private String time;
     private UUID customerID;
 
+    public Feedback() {
+    }
+
+    public Feedback(UUID feedbackID, String reviews, String suggestions, String date, String time, UUID customerID) {
+        this.feedbackID = feedbackID;
+        this.reviews = reviews;
+        this.suggestions = suggestions;
+        this.date = date;
+        this.time = time;
+        this.customerID = customerID;
+    }
+
     public UUID getFeedbackID() {
         return feedbackID;
     }
