@@ -19,8 +19,7 @@ public class AuthenticationService {
         this.userRepository = userRepository;
     }
 
-    public void register(String fname, String lname, String pEmail, String pswd, String houseNo, String state, String city, String country, String pinCode, String gender) {
-        UUID userID = UUID.randomUUID();
+    public void register(UUID userID, String fname, String lname, String pEmail, String pswd, String houseNo, String state, String city, String country, String pinCode, String gender) {
         try {
             userRepository.registerUser(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
 //            System.out.println(userID + " " + fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender);
@@ -32,5 +31,10 @@ public class AuthenticationService {
     public Boolean checkUserCredentials(String pEmail, String password) {
         User user = userRepository.getUser(pEmail);
         return user.getPswd().equals(password);
+    }
+
+    public User getUserByEmail(String pEmail){
+        User user = userRepository.getUser(pEmail);
+        return user;
     }
 }

@@ -8,6 +8,17 @@ public class Customer {
     private String aadharCardNumber;
     private UUID userID;
 
+    public Customer() {
+    }
+
+    public Customer(UUID customerID, int numberOfMembers, String alternateEmailAddress, String aadharCardNumber, UUID userID) {
+        this.customerID = customerID;
+        this.numberOfMembers = numberOfMembers;
+        this.alternateEmailAddress = alternateEmailAddress;
+        this.aadharCardNumber = aadharCardNumber;
+        this.userID = userID;
+    }
+
     public UUID getCustomerID() {
         return customerID;
     }

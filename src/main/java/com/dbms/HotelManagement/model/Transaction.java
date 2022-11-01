@@ -10,7 +10,7 @@ public class Transaction {
     private String mode;
     private String branchName;
     private String accNo;
-    private float amount;
+    private int amount;
     private String date;
     private String time;
     private UUID salaryID;
@@ -74,11 +74,11 @@ public class Transaction {
         this.accNo = accNo;
     }
 
-    public Float getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Float amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

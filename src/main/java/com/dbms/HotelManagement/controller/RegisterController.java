@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 public class RegisterController {
@@ -21,6 +23,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String submitRegister(@RequestBody User user) {
+        UUID userID = UUID.randomUUID();
         String fname = user.getFname();
         String lname = user.getLname();
         String pEmail = user.getpEmail();
@@ -31,7 +34,7 @@ public class RegisterController {
         String country = user.getCountry();
         String pinCode = user.getPinCode();
         String gender = user.getGender();
-        authenticationService.register(fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
+        authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
         return fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender;
     }
 }
