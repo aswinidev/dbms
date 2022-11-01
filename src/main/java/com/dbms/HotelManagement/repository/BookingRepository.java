@@ -1,6 +1,5 @@
 package com.dbms.HotelManagement.repository;
 
-import ch.qos.logback.core.encoder.EchoEncoder;
 import com.dbms.HotelManagement.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -8,9 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Book;
 import java.util.*;
-import java.util.Collection.*;
 
 @Repository
 public class BookingRepository {
@@ -23,22 +20,23 @@ public class BookingRepository {
     public int getSingle(String in, String out){
         String sql = "select count(*) from Room where type = 'single' and roomNo NOT IN " +
                 "(select roomNo from BookingRoom where bookingID IN " +
-                "(select bookingID from Booking where checkIn<? and checkOut>?))";
+                "(select Booking.bookingID from Booking where checkInDate<? and checkOutDate>?))";
+//        String sql = "select count(*) from Room where type='single' ";
         try{
-            return jdbcTemplate.queryForObject(sql, new Object[]{out, in}, new BeanPropertyRowMapper<>(Integer.class));
+            return jdbcTemplate.queryForObject(sql, new Object[]{out, in}, Integer.class);
         }
         catch (Exception e){
             System.out.println(e);
         }
-        return 0;
+        return 3;
     }
 
     public int getDouble(String in, String out){
         String sql = "select count(*) from Room where type = 'double' and roomNo NOT IN " +
                 "(select roomNo from BookingRoom where bookingID IN " +
-                "(select bookingID from Booking where checkIn<? and checkOut>?))";
+                "(select Booking.bookingID from Booking where checkInDate<? and checkOutDate>?))";
         try{
-            return jdbcTemplate.queryForObject(sql, new Object[]{out, in}, new BeanPropertyRowMapper<>(Integer.class));
+            return jdbcTemplate.queryForObject(sql, new Object[]{out, in}, Integer.class);
         }
         catch (Exception e){
             System.out.println(e);
@@ -50,7 +48,7 @@ public class BookingRepository {
     public List<Room> getRoomSingle(String in, String out){
         String sql = "select * from Room where type = 'single' and roomNo NOT IN " +
                 "(select roomNo from BookingRoom where bookingID IN " +
-                "(select bookingID from Booking where checkIn<? and checkOut>?))";
+                "(select Booking.bookingID from Booking where checkInDate<? and checkOutDate>?))";
         try{
             return jdbcTemplate.query(sql, new Object[]{out, in}, new BeanPropertyRowMapper(Room.class));
         }
@@ -63,7 +61,7 @@ public class BookingRepository {
     public List<Room> getRoomDouble(String in, String out){
         String sql = "select * from Room where type = 'double' and roomNo NOT IN " +
                 "(select roomNo from BookingRoom where bookingID IN " +
-                "(select bookingID from Booking where checkIn<? and checkOut>?))";
+                "(select Booking.bookingID from Booking where checkInDate<? and checkOutDate>?))";
         try{
             return jdbcTemplate.query(sql, new Object[]{out, in}, new BeanPropertyRowMapper(Room.class));
         }
@@ -91,7 +89,7 @@ public class BookingRepository {
     }
 
     public int book(UUID bookingID, String checkInDate, String checkOutDate, UUID customerID) {
-        String sql = "INSERT INTO Booking(bookingID, checkInDate, checkOutDate, customerID) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO Booking(bookingID, checkInDate, checkOutDate, customerID) VALUES (?,?,?,?)";
 //        System.out.println(userID + " " + fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender);
 //        try {
         return jdbcTemplate.update(sql, bookingID.toString(), checkInDate, checkOutDate, customerID.toString());

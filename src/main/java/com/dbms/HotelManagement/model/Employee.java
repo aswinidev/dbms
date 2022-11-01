@@ -17,6 +17,25 @@ public class Employee {
     private String deptName;
     private UUID superID;
 
+    public Employee() {
+    }
+
+    public Employee(UUID empID, String currHouseNo, String currPincode, String currCity, String currState, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID) {
+        this.empID = empID;
+        this.currHouseNo = currHouseNo;
+        this.currPincode = currPincode;
+        this.currCity = currCity;
+        this.currState = currState;
+        this.maritalStatus = maritalStatus;
+        this.panCard = panCard;
+        this.accountNo = accountNo;
+        this.IFSCCode = IFSCCode;
+        this.bankName = bankName;
+        this.userID = userID;
+        this.deptName = deptName;
+        this.superID = superID;
+    }
+
     public UUID getEmpID() {
         return empID;
     }

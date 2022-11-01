@@ -21,9 +21,6 @@ import javax.servlet.http.HttpSession;
 public class DashboardController {
     private final DashboardService dashboardService;
     private final AuthenticationService authenticationService;
-    private User user;
-    private Employee emp;
-    private Customer cust;
 
     @Autowired
     public DashboardController(DashboardService dashboardService, AuthenticationService authenticationService){
@@ -32,42 +29,39 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public User dashboard(HttpSession session){
+    public User dashboard(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails obj = (UserDetails) auth.getPrincipal();
         String pEmail = obj.getUsername();
-        user = dashboardService.getDetails(pEmail);
-        emp = dashboardService.getEmp(user.getUserID());
-        if(emp!=null) {
-            user.setIsEmp(true);
-        }
-        else{
-            user.setIsEmp(false);
-        }
+//        return pEmail;
+
+        User user = dashboardService.getDetails(pEmail);
+        Employee emp = dashboardService.getEmp(user.getUserID());
+        System.out.println(emp);
+        user.setIsEmp(user.getUserID() == emp.getUserID());
         return user;
     }
 
-   @GetMapping("/chutiyadashboard")
-    public String ChutiyaDashboard(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("Dashboard: " + auth);
-//        System.out.println("Hello");
-//        try{System.out.println(session.getAttribute("USER_SESSION"));}catch (Exception e){System.out.println(e);}
-//        String pEmail = authenticationService.getCurrentUser(session);
-//        System.out.println(pEmail);
-        return "dashboard";
-//        System.out.println(pEmail);
-//        User user = dashboardService.getDetails(pEmail);
-//        return user;
-    }
 
     @GetMapping("/dashboard/employee")
-    public Employee employee(HttpSession session){
+    public Employee employee(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails obj = (UserDetails) auth.getPrincipal();
+        String pEmail = obj.getUsername();
+
+        User user = dashboardService.getDetails(pEmail);
+        Employee emp = dashboardService.getEmp(user.getUserID());
         return emp;
     }
 
     @GetMapping("/dashboard/customer")
-    public Customer customer(HttpSession session){
+    public Customer customer(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails obj = (UserDetails) auth.getPrincipal();
+        String pEmail = obj.getUsername();
+
+        User user = dashboardService.getDetails(pEmail);
+        Customer cust = dashboardService.getCust(user.getUserID());
         cust = dashboardService.getCust(user.getUserID());
         return cust;
     }

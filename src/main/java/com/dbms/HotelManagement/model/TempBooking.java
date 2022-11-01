@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.model;
 
+
 public class TempBooking {
     private String checkIn;
     private String checkOut;
@@ -7,6 +8,13 @@ public class TempBooking {
     private int doubleOcc;
 
     public TempBooking() {
+    }
+
+    public TempBooking(String checkIn, String checkOut, int singleOcc, int doubleOcc) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.singleOcc = singleOcc;
+        this.doubleOcc = doubleOcc;
     }
 
     public String getCheckIn() {
