@@ -13,6 +13,21 @@ public class ContactUs {
     private String time;
     private UUID customerID;
 
+    public ContactUs() {
+    }
+
+    public ContactUs(UUID queryID, String name, String contactNumber, String reply, String query, String emailID, String date, String time, UUID customerID) {
+        this.queryID = queryID;
+        this.name = name;
+        this.contactNumber = contactNumber;
+        this.reply = reply;
+        this.query = query;
+        this.emailID = emailID;
+        this.date = date;
+        this.time = time;
+        this.customerID = customerID;
+    }
+
     public UUID getQueryID() {
         return queryID;
     }
