@@ -43,9 +43,9 @@ public class EmployeeRepository {
         return allEmployees;
     }
 
-    public void addEmployee(UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID){
-        String sql = "INSERT INTO Employee(empID, currHouseNo, currPincode, currCity, currState, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, empID.toString(), houseNo, pincode, city, state, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID.toString(), deptName, superID.toString());
+    public void addEmployee(UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, int salary, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID){
+        String sql = "INSERT INTO Employee(empID, currHouseNo, currPincode, currCity, currState, maritalStatus, salary, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, empID.toString(), houseNo, pincode, city, state, maritalStatus, salary, panCard, accountNo, IFSCCode, bankName, userID.toString(), deptName, superID.toString());
     }
 
     private RowMapper<Employee> EmployeeMapper() {
@@ -57,6 +57,7 @@ public class EmployeeRepository {
                     resultSet.getString("currCity"),
                     resultSet.getString("currState"),
                     resultSet.getString("maritalStatus"),
+                    resultSet.getInt("salary"),
                     resultSet.getString("panCard"),
                     resultSet.getString("accountNo"),
                     resultSet.getString("IFSCCode"),

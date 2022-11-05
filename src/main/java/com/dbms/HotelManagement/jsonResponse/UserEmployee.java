@@ -26,6 +26,24 @@ public class UserEmployee {
     private String pswd;
     private String country;
     private String gender;
+    private int salary;
+    private int leavesAllowed;
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public int getLeavesAllowed() {
+        return leavesAllowed;
+    }
+
+    public void setLeavesAllowed(int leavesAllowed) {
+        this.leavesAllowed = leavesAllowed;
+    }
 
     public UUID getEmpID() {
         return empID;

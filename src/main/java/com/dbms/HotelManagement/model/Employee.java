@@ -9,6 +9,7 @@ public class Employee {
     private String currCity;
     private String currState;
     private String maritalStatus;
+    private int salary;
     private String panCard;
     private String accountNo;
     private String IFSCCode;
@@ -20,13 +21,14 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(UUID empID, String currHouseNo, String currPincode, String currCity, String currState, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID) {
+    public Employee(UUID empID, String currHouseNo, String currPincode, String currCity, String currState, String maritalStatus, int salary, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID) {
         this.empID = empID;
         this.currHouseNo = currHouseNo;
         this.currPincode = currPincode;
         this.currCity = currCity;
         this.currState = currState;
         this.maritalStatus = maritalStatus;
+        this.salary = salary;
         this.panCard = panCard;
         this.accountNo = accountNo;
         this.IFSCCode = IFSCCode;
@@ -34,6 +36,14 @@ public class Employee {
         this.userID = userID;
         this.deptName = deptName;
         this.superID = superID;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     public UUID getEmpID() {
