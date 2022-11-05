@@ -39,4 +39,12 @@ public class DashboardService {
         Customer cust = custRepository.getCustomer(userID.toString());
         return cust;
     }
+
+    public void updateUser(String fname, String lname, String pEmail, String houseNo, String state, String city, String country, String pinCode) {
+        userRepository.updateUser(fname, lname, pEmail, houseNo, state, city, country, pinCode);
+    }
+
+    public void updateCustomer(UUID userID, String aadharNo, String alterEmail) {
+        custRepository.updateCustomer(userID, aadharNo, alterEmail);
+    }
 }
