@@ -1,10 +1,7 @@
 package com.dbms.HotelManagement.controller;
 
 import com.dbms.HotelManagement.extraclass.GetBooking;
-import com.dbms.HotelManagement.model.Customer;
-import com.dbms.HotelManagement.model.Member;
-import com.dbms.HotelManagement.model.TempBooking;
-import com.dbms.HotelManagement.model.User;
+import com.dbms.HotelManagement.model.*;
 import com.dbms.HotelManagement.service.AuthenticationService;
 import com.dbms.HotelManagement.service.BookingService;
 import com.dbms.HotelManagement.service.DashboardService;
@@ -14,12 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -65,6 +60,19 @@ public class BookingController {
         UUID bookingID = bookingService.book(customerID, checkInDate, checkOutDate, booking.getSingleRoom(), booking.getDoubleRoom());
         int r = memberService.addMember(bookingID, booking.getCountMember(), booking.getMembersList());
         return "booking successful";
+    }
+
+    @GetMapping("customer/booking")
+    public List<GetBooking> getCustBooking(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails obj = (UserDetails) auth.getPrincipal();
+        String pEmail = obj.getUsername();
+
+        User user = dashboardService.getDetails(pEmail);
+        Customer cust = dashboardService.getCust(user.getUserID());
+        cust = dashboardService.getCust(user.getUserID());
+
+        return bookingService.getBookings(cust.getCustomerID());
     }
 
 

@@ -1,6 +1,8 @@
 package com.dbms.HotelManagement.repository;
 
-import com.dbms.HotelManagement.model.Room;
+import com.dbms.HotelManagement.extraclass.GetBooking;
+import com.dbms.HotelManagement.model.*;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,9 +15,10 @@ import java.util.*;
 public class BookingRepository {
 
     private final JdbcTemplate jdbcTemplate;
+    private final MemberRepository memberRepo;
 
     @Autowired
-    public BookingRepository(JdbcTemplate jdbcTemplate){ this.jdbcTemplate = jdbcTemplate; }
+    public BookingRepository(JdbcTemplate jdbcTemplate, MemberRepository memberRepo){ this.jdbcTemplate = jdbcTemplate; this.memberRepo = memberRepo;}
 
     public int getSingle(String in, String out){
         String sql = "select count(*) from Room where type = 'single' and roomNo NOT IN " +
@@ -96,6 +99,46 @@ public class BookingRepository {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
+    }
+
+    public List<Booking> getBookings(UUID custID){
+        String sql = "Select * from Booking where customerID = ?";
+        List<Booking> bookings= jdbcTemplate.query(sql, new Object[]{custID.toString()}, BookingMapper());
+        return bookings;
+    }
+
+    public int numSingle(UUID bookingID){
+        String sql = "Select count(*) from Room where roomNo in (Select roomNo from BookingRoom where bookingiD=?) and type='single'";
+        return jdbcTemplate.queryForObject(sql, new Object[]{bookingID.toString()}, Integer.class);
+
+    }
+
+    public int numDouble(UUID bookingID){
+        String sql = "Select count(*) from Room where roomNo in (Select roomNo from BookingRoom where bookingiD=?) and type='double'";
+        return jdbcTemplate.queryForObject(sql, new Object[]{bookingID.toString()}, Integer.class);
+
+    }
+
+    public List<GetBooking> getGetBooking(UUID custID){
+        List<Booking> bookings=getBookings(custID);
+        List<GetBooking> GetBookings = new ArrayList<>();
+        for(int i=0;i<bookings.size();i++){
+            GetBooking getBook = new GetBooking(bookings.get(i).getBookingID(), bookings.get(i).getCheckInDate(), bookings.get(i).getCheckOutDate(), memberRepo.getCountMember(bookings.get(i).getBookingID()), numSingle(bookings.get(i).getBookingID()), numDouble(bookings.get(i).getBookingID()), new ArrayList<Member>());
+            GetBookings.add(getBook);
+        }
+        return GetBookings;
+    }
+
+
+    private RowMapper<Booking> BookingMapper() {
+        return (resultSet, i) -> {
+            return new Booking(
+                    UUID.fromString(resultSet.getString("bookingID")),
+                    UUID.fromString(resultSet.getString("customerID")),
+                    resultSet.getString("checkInDate"),
+                    resultSet.getString("checkOutDate")
+            );
+        };
     }
 
 }

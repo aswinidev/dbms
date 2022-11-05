@@ -1,5 +1,7 @@
 package com.dbms.HotelManagement.service;
 
+import com.dbms.HotelManagement.extraclass.GetBooking;
+import com.dbms.HotelManagement.model.Booking;
 import com.dbms.HotelManagement.model.Member;
 import com.dbms.HotelManagement.model.Room;
 import com.dbms.HotelManagement.repository.BookingRepository;
@@ -43,6 +45,10 @@ public class BookingService {
         return new UUID( 0 , 0 );
     }
 
+    public List<GetBooking> getBookings(UUID custID){
+        return bookingRepository.getGetBooking(custID);
+
+    }
 
 
 
