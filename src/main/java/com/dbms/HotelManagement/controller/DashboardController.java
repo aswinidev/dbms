@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.controller;
 
+import com.dbms.HotelManagement.jsonResponse.UserCustomer;
 import com.dbms.HotelManagement.model.Customer;
 import com.dbms.HotelManagement.model.Employee;
 import com.dbms.HotelManagement.model.User;
@@ -64,6 +65,36 @@ public class DashboardController {
         Customer cust = dashboardService.getCust(user.getUserID());
         cust = dashboardService.getCust(user.getUserID());
         return cust;
+    }
+
+    @GetMapping("/edit-profile")
+    public UserCustomer userCust(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails obj = (UserDetails) auth.getPrincipal();
+        String pEmail = obj.getUsername();
+
+        User user = dashboardService.getDetails(pEmail);
+        Customer cust = dashboardService.getCust(user.getUserID());
+        cust = dashboardService.getCust(user.getUserID());
+        UserCustomer uc=new UserCustomer();
+        uc.setUserID(user.getUserID());
+        uc.setFname(user.getFname());
+        uc.setLname(user.getLname());
+        uc.setpEmail(user.getpEmail());
+        uc.setPswd(user.getPswd());
+        uc.setHouseNo(user.getHouseNo());
+        uc.setState(user.getState());
+        uc.setCity(user.getCity());
+        uc.setCountry(user.getCountry());
+        uc.setPinCode(user.getPinCode());
+        uc.setGender(user.getGender());
+        uc.setCustomerID(cust.getCustomerID());
+        uc.setAlternateEmailAddress(cust.getAlternateEmailAddress());
+        uc.setAadharCardNumber(cust.getAadharCardNumber());
+
+        return uc;
+
+
     }
 }
 

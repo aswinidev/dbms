@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class GetBooking {
+    private UUID bookingID;
     private String checkInDate;
     private String checkOutDate;
     private int countMember;
@@ -16,7 +18,8 @@ public class GetBooking {
 
     public GetBooking() {
     }
-    public GetBooking(String checkInDate, String checkOutDate, int countMember, int singleRoom, int doubleRoom, List<Member> membersList) {
+    public GetBooking(UUID bookingID, String checkInDate, String checkOutDate, int countMember, int singleRoom, int doubleRoom, List<Member> membersList) {
+        this.bookingID = bookingID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.countMember = countMember;

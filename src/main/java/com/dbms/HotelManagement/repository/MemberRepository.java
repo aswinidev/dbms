@@ -26,6 +26,19 @@ public class MemberRepository {
         }
     }
 
+    public int getCountMember(UUID bookingID){
+        String sql = "SELECT count(*) from Member where bookingID = ?";
+
+        try{
+            return jdbcTemplate.queryForObject(sql, new Object[]{bookingID}, Integer.class);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        return 0;
+
+    }
+
 
 //    public
 }
