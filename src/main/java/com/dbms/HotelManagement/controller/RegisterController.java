@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.controller;
 
+import com.dbms.HotelManagement.jsonResponse.UserCustomer;
 import com.dbms.HotelManagement.model.User;
 import com.dbms.HotelManagement.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String submitRegister(@RequestBody User user) {
+    public String submitRegister(@RequestBody UserCustomer user) {
         UUID userID = UUID.randomUUID();
         String fname = user.getFname();
         String lname = user.getLname();
@@ -34,6 +35,9 @@ public class RegisterController {
         String country = user.getCountry();
         String pinCode = user.getPinCode();
         String gender = user.getGender();
+        UUID customerID = UUID.randomUUID();
+        String aadharNo = user.getAadharCardNumber();
+        String alterEmail = user.getAlternateEmailAddress();
         authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
         return fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender;
     }

@@ -3,20 +3,31 @@ package com.dbms.HotelManagement.model;
 import java.util.UUID;
 
 public class LeavesSalaries {
-    private UUID salaryID;
+    private int salaryPaid;
     private UUID empID;
-    private int overtime;
     private int month;
     private int year;
     private int leavesAllowed;
     private int leavesTaken;
 
-    public UUID getSalaryID() {
-        return salaryID;
+    public LeavesSalaries(int salaryPaid, UUID empID, int month, int year, int leavesAllowed, int leavesTaken) {
+        this.salaryPaid = salaryPaid;
+        this.empID = empID;
+        this.month = month;
+        this.year = year;
+        this.leavesAllowed = leavesAllowed;
+        this.leavesTaken = leavesTaken;
     }
 
-    public void setSalaryID(UUID salaryID) {
-        this.salaryID = salaryID;
+    public LeavesSalaries() {
+    }
+
+    public int getSalaryPaid() {
+        return salaryPaid;
+    }
+
+    public void setSalaryPaid(int salaryPaid) {
+        this.salaryPaid = salaryPaid;
     }
 
     public UUID getEmpID() {
@@ -25,14 +36,6 @@ public class LeavesSalaries {
 
     public void setEmpID(UUID empID) {
         this.empID = empID;
-    }
-
-    public int getOvertime() {
-        return overtime;
-    }
-
-    public void setOvertime(int overtime) {
-        this.overtime = overtime;
     }
 
     public int getMonth() {

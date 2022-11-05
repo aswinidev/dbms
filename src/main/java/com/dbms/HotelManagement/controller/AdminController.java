@@ -1,15 +1,16 @@
 package com.dbms.HotelManagement.controller;
 
 import com.dbms.HotelManagement.jsonResponse.UserEmployee;
-import com.dbms.HotelManagement.model.Employee;
-import com.dbms.HotelManagement.model.Feedback;
-import com.dbms.HotelManagement.model.User;
+import com.dbms.HotelManagement.model.*;
 import com.dbms.HotelManagement.service.AdminService;
 import com.dbms.HotelManagement.service.AuthenticationService;
+import com.dbms.HotelManagement.service.DashboardService;
+import com.dbms.HotelManagement.service.LeavesSalariesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,13 +19,19 @@ import java.util.UUID;
 public class AdminController {
     private final AdminService adminService;
     private final AuthenticationService authenticationService;
+
+    private final DashboardService dashboardService;
+//    private final
     private final PasswordEncoder passwordEncoder;
+    private final LeavesSalariesService leavesSalariesService;
 
     @Autowired
-    public AdminController(AdminService adminService, AuthenticationService authenticationService, PasswordEncoder passwordEncoder) {
+    public AdminController(AdminService adminService, AuthenticationService authenticationService, DashboardService dashboardService, PasswordEncoder passwordEncoder, LeavesSalariesService leavesSalariesService) {
         this.adminService = adminService;
         this.authenticationService = authenticationService;
+        this.dashboardService = dashboardService;
         this.passwordEncoder = passwordEncoder;
+        this.leavesSalariesService = leavesSalariesService;
     }
 
     // TODO make another model that would contain the attributes of both user and employee
@@ -34,6 +41,7 @@ public class AdminController {
     public List<Employee> allEmployee(){
         return adminService.getEmployees();
     }
+
 
     @PostMapping("/admin/deleteEmployee")
     public String deleteEmployee(@RequestBody User user){
@@ -58,13 +66,15 @@ public class AdminController {
         authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
         // Employee Details
         // UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID
+        UUID empID = UUID.randomUUID();
         Employee employee = new Employee(
-                UUID.randomUUID(),
+                empID,
                 userEmployee.getCurrHouseNo(),
                 userEmployee.getCurrPincode(),
                 userEmployee.getCurrCity(),
                 userEmployee.getCurrState(),
                 userEmployee.getMaritalStatus(),
+                userEmployee.getSalary(),
                 userEmployee.getPanCard(),
                 userEmployee.getAccountNo(),
                 userEmployee.getIFSCCode(),
@@ -74,14 +84,62 @@ public class AdminController {
                 UUID.fromString(userEmployee.getSuperID())
         );
         adminService.addEmployee(employee);
+
+        // add leaves and salaries
+        int salary = userEmployee.getSalary();
+        Calendar c = Calendar.getInstance();
+        int month = c.get(Calendar.MONTH) + 1;
+        int year = c.get(Calendar.YEAR);
+        int leavesAllowed = userEmployee.getLeavesAllowed();
+        int leavesTaken = 0;
+
+        adminService.addSalary(salary, empID, month, year, leavesAllowed, leavesTaken);
+
         return "Added Employee";
     }
+
 
     @GetMapping("/admin/allFeedback")
     public List<Feedback> allFeedback(){
         return adminService.getFeedback();
     }
 
+//    TODO UNCOMMENT
+//    @GetMapping("/admin/allQuery")
+//    public List<ContactUs> allQuery() {
+//        return adminService.getQuery();
+//    }
+
+//    @PostMapping("/admin/addReply")
+//    public String addReply(@RequestBody ContactUs contactUs){
+//        UUID queryID = contactUs.getQueryID();
+//        String reply = contactUs.getReply();
+////        ContactUs query = adminService.getQueryByID(queryID);
+//        adminService.replyQuery(queryID,reply);
+//        return "Replied..";
+//    }
+
+    @PostMapping("/admin/paySalary")
+    public int paySalary(@RequestBody LeavesSalaries leavesSalaries){
+        Employee emp= dashboardService.getEmp(leavesSalaries.getEmpID());
+        return leavesSalariesService.paySalary(leavesSalaries.getEmpID(), leavesSalaries.getMonth(), leavesSalaries.getYear(), emp.getSalary(), leavesSalaries.getLeavesAllowed());
+    }
+
+    @PostMapping("/admin/getLeavesSalaries")
+    public LeavesSalaries getLeavesSalaries(@RequestBody UUID empID){
+        Calendar c = Calendar.getInstance();
+        int month = c.get(Calendar.MONTH) + 1;
+        int year = c.get(Calendar.YEAR);
+        return leavesSalariesService.getLeavesSalaries(empID, month , year);
+
+    }
+
+    @PostMapping("/admin/addLeave")
+    public int addLeave(@RequestBody LeavesSalaries leavesSalaries){
+        return leavesSalariesService.addLeave(leavesSalaries.getEmpID(), leavesSalaries.getLeavesTaken());
+    }
+
+    
 //    @GetMapping("/admin/listCustomer")
 //    public List<Customer> allCustomer(){
 //        return
