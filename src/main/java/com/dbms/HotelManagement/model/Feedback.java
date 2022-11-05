@@ -6,8 +6,8 @@ public class Feedback {
     private UUID feedbackID;
     private String reviews;
     private String suggestions;
-    private String date;
-    private String time;
+    private String fDate;
+    private String fTime;
     private UUID customerID;
 
     public Feedback() {
@@ -17,8 +17,8 @@ public class Feedback {
         this.feedbackID = feedbackID;
         this.reviews = reviews;
         this.suggestions = suggestions;
-        this.date = date;
-        this.time = time;
+        this.fDate = date;
+        this.fTime = time;
         this.customerID = customerID;
     }
 
@@ -47,19 +47,19 @@ public class Feedback {
     }
 
     public String getDate() {
-        return date;
+        return fDate;
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.fDate = date;
     }
 
     public String getTime() {
-        return time;
+        return fTime;
     }
 
     public void setTime(String time) {
-        this.time = time;
+        this.fTime = time;
     }
 
     public UUID getCustomerID() {

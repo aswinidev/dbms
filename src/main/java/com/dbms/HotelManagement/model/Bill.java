@@ -5,16 +5,16 @@ import java.util.UUID;
 public class Bill {
     private UUID billID;
     private UUID bookingID;
-    private float amount;
-    private String date;
-    private String time;
+    private int amount;
+    private String bDate;
+    private String bTime;
 
-    public Bill(UUID billID, UUID bookingID, float amount, String date, String time) {
+    public Bill(UUID billID, UUID bookingID, int amount, String date, String time) {
         this.billID = billID;
         this.bookingID = bookingID;
         this.amount = amount;
-        this.date = date;
-        this.time = time;
+        this.bDate = date;
+        this.bTime = time;
     }
 
     public Bill() {
@@ -40,23 +40,23 @@ public class Bill {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
-    public String getDate() {
-        return date;
+    public String getbDate() {
+        return bDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setbDate(String bDate) {
+        this.bDate = bDate;
     }
 
-    public String getTime() {
-        return time;
+    public String getbTime() {
+        return bTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setbTime(String bTime) {
+        this.bTime = bTime;
     }
 }

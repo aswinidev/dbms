@@ -11,12 +11,13 @@ public class Transaction {
     private String branchName;
     private String accNo;
     private int amount;
-    private String date;
-    private String time;
-    private UUID salaryID;
+    private String tDate;
+    private String tTime;
+    private int month;
+    private int year;
     private UUID employeeID;
     private UUID billID;
-    private UUID customerID;
+    private UUID bookingID;
 
     public UUID getTransactionID() {
         return transactionID;
@@ -82,28 +83,44 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getDate() {
-        return date;
+    public String gettDate() {
+        return tDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void settDate(String tDate) {
+        this.tDate = tDate;
     }
 
-    public String getTime() {
-        return time;
+    public String gettTime() {
+        return tTime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void settTime(String tTime) {
+        this.tTime = tTime;
     }
 
-    public UUID getSalaryID() {
-        return salaryID;
+    public int getMonth() {
+        return month;
     }
 
-    public void setSalaryID(UUID salaryID) {
-        this.salaryID = salaryID;
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public UUID getBookingID() {
+        return bookingID;
+    }
+
+    public void setBookingID(UUID bookingID) {
+        this.bookingID = bookingID;
     }
 
     public UUID getEmployeeID() {
@@ -122,11 +139,5 @@ public class Transaction {
         this.billID = billID;
     }
 
-    public UUID getCustomerID() {
-        return customerID;
-    }
 
-    public void setCustomerID(UUID customerID) {
-        this.customerID = customerID;
-    }
 }

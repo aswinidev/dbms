@@ -1,6 +1,7 @@
 package com.dbms.HotelManagement.model;
 
 public class Items {
+    private String itemName;
     private int noOfItems;
     private float price;
     private String contactNo;
@@ -36,5 +37,13 @@ public class Items {
 
     public void setSupplierName(String supplierName) {
         SupplierName = supplierName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 }

@@ -3,15 +3,15 @@ package com.dbms.HotelManagement.model;
 import java.util.UUID;
 
 public class ServiceUsed {
-    private String deptName;
+    private String serviceName;
     private UUID customerID;
 
     public String getDeptName() {
-        return deptName;
+        return serviceName;
     }
 
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
+    public void setDeptName(String serviceName) {
+        this.serviceName = serviceName;
     }
 
     public UUID getCustomerID() {

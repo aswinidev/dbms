@@ -4,5 +4,6 @@ import java.util.UUID;
 
 public class MemberMiddleName {
     private String name;
-    private UUID memberId;
+    private String aadharNo;
+    private UUID bookingID;
 }
