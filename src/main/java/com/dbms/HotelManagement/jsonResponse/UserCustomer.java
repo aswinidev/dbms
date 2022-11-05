@@ -35,6 +35,7 @@ public class UserCustomer {
         this.aadharCardNumber = aadharCardNumber;
     }
 
+
     public UserCustomer() {
     }
 

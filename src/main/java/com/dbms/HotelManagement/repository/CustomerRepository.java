@@ -19,7 +19,8 @@ public class CustomerRepository {
     }
 
     public int registerCustomer(UUID customerID, String alternateEmailAddress, String aadharCardNumber, UUID userID) {
-        String sql = "INSERT INTO Customer(customerID, alternateEmailAddress, pswd, alternateEmailAddress, userID) VALUES (?,?,?,?)";
+        System.out.println(aadharCardNumber);
+        String sql = "INSERT INTO Customer(customerID, alternateEmailAddress, aadharCardNumber, userID) VALUES (?,?,?,?)";
 //        System.out.println(userID + " " + fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender);
 //        try {
         return jdbcTemplate.update(sql, customerID.toString(), alternateEmailAddress, aadharCardNumber, userID.toString());
