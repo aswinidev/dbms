@@ -39,6 +39,7 @@ public class UserRepository {
         return u;
     }
 
+
     private RowMapper<User> UserMapper() {
         return (resultSet, i) -> {
             return new User(
@@ -60,5 +61,17 @@ public class UserRepository {
     public void removeUser(String pEmail) {
         String sql = "DELETE FROM User WHERE pEmail = ?";
         jdbcTemplate.update(sql, pEmail);
+    }
+
+    public void updateUser(String fname, String lname, String pEmail, String houseNo, String state, String city, String country, String pinCode) {
+
+        String sql = "UPDATE User fname = ?, lname = ?, houseNo = ?, state = ?, city = ?, country = ?, pinCode = ? where pEmail = ?";
+
+        try {
+            jdbcTemplate.update(sql, fname, lname, houseNo, state, city, country, pinCode, pEmail);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 }

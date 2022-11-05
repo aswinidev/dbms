@@ -37,4 +37,15 @@ public class CustomerRepository {
         return c;
     }
 
+    public void updateCustomer(UUID userID, String aadharNo, String alterEmail) {
+        String sql = "UPDATE Customer aadharNo = ?, alterEmail = ? where userID = ?";
+
+        try {
+            jdbcTemplate.update(sql, aadharNo, alterEmail, userID);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
 }
