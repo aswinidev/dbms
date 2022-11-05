@@ -37,8 +37,11 @@ public class RegisterController {
         String gender = user.getGender();
         UUID customerID = UUID.randomUUID();
         String aadharNo = user.getAadharCardNumber();
+        System.out.println(aadharNo);
         String alterEmail = user.getAlternateEmailAddress();
+        System.out.println(aadharNo);
         authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
+        authenticationService.registerCustomer(customerID, alterEmail, aadharNo, userID);
         return fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender;
     }
 }
