@@ -39,13 +39,20 @@ public class EmployeeRepository {
 
     public List<Employee> getAllEmployee() {
         String sql = "SELECT * FROM Employee";
-        List<Employee> allEmployees= jdbcTemplate.query(sql, new Object[]{}, EmployeeMapper());
-        return allEmployees;
+        List<Employee> e = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper(Employee.class));
+        return e;
     }
 
     public void addEmployee(UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, int salary, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID){
         String sql = "INSERT INTO Employee(empID, currHouseNo, currPincode, currCity, currState, maritalStatus, salary, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         jdbcTemplate.update(sql, empID.toString(), houseNo, pincode, city, state, maritalStatus, salary, panCard, accountNo, IFSCCode, bankName, userID.toString(), deptName, superID.toString());
+    }
+
+    public List<Employee> getSubord( UUID empID)
+    {
+        String sql="SELECT * FROM Employee WHERE superID=?";
+        return jdbcTemplate.query(sql, new Object[]{empID.toString()}, EmployeeMapper());
+
     }
 
     private RowMapper<Employee> EmployeeMapper() {
