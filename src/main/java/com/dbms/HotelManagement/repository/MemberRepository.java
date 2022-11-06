@@ -30,7 +30,9 @@ public class MemberRepository {
         String sql = "SELECT count(*) from Member where bookingID = ?";
 
         try{
-            return jdbcTemplate.queryForObject(sql, new Object[]{bookingID}, Integer.class);
+            int c = jdbcTemplate.queryForObject(sql, new Object[]{bookingID.toString()}, Integer.class);
+            System.out.println(c);
+            return c;
         }
         catch (Exception e){
             System.out.println(e);

@@ -103,7 +103,7 @@ public class BookingRepository {
 
     public List<Booking> getBookings(UUID custID){
         String sql = "Select * from Booking where customerID = ?";
-        List<Booking> bookings= jdbcTemplate.query(sql, new Object[]{custID.toString()}, BookingMapper());
+        List<Booking> bookings= jdbcTemplate.query(sql, new Object[]{custID.toString()}, new BeanPropertyRowMapper<>(Booking.class));
         return bookings;
     }
 

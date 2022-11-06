@@ -22,7 +22,7 @@ public class BookingService {
     public boolean getAvail(String checkIn, String checkOut, int singleOcc, int doubleOcc){
         int singleAvail = bookingRepository.getSingle(checkIn, checkOut);
         int doubleAvail = bookingRepository.getDouble(checkIn, checkOut);
-        return singleAvail >= singleOcc && doubleAvail >= doubleOcc;
+        return (singleAvail >= singleOcc && doubleAvail >= doubleOcc);
     }
 
     public UUID book(UUID customerID, String checkInDate, String checkOutDate, int singleRoom, int doubleRoom){
