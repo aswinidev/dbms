@@ -112,6 +112,9 @@ public class DashboardController {
         String alterEmail = user.getAlternateEmailAddress();
         User userNew = dashboardService.getDetails(pEmail);
 
+        System.out.println(alterEmail);
+        System.out.println(userNew.getUserID());
+
         dashboardService.updateUser(fname, lname, pEmail, houseNo, state, city, country, pinCode);
         dashboardService.updateCustomer(userNew.getUserID(), aadharNo, alterEmail);
 
