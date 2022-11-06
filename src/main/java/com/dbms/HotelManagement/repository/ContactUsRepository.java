@@ -38,8 +38,8 @@ public class ContactUsRepository {
         jdbcTemplate.update(sql,reply,queryID.toString());
     }
 
-    public void submitQuery(UUID queryID, String name, String contactNumber, String reply, String query, String emailID, String date, String time, UUID customerID) {
-        String sql = "INSERT INTO ContactUs (queryID, name, contactNumber, reply, query, emailID, date, time, customerID) VALUES (?,?,?,?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, queryID.toString(), name, contactNumber, reply, query, emailID, date, time, customerID.toString());
+    public void submitQuery(UUID queryID, String name, String contactNumber, String reply, String query, String emailID, UUID customerID) {
+        String sql = "INSERT INTO ContactUs (queryID, name, contactNumber, reply, query, emailID, qdate, qtime, customerID) VALUES (?,?,?,?,?,?,current_date,current_time,?)";
+        jdbcTemplate.update(sql, queryID.toString(), name, contactNumber, reply, query, emailID, customerID.toString());
     }
 }

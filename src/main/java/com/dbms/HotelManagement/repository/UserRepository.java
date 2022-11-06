@@ -65,7 +65,7 @@ public class UserRepository {
 
     public void updateUser(String fname, String lname, String pEmail, String houseNo, String state, String city, String country, String pinCode) {
 
-        String sql = "UPDATE User fname = ?, lname = ?, houseNo = ?, state = ?, city = ?, country = ?, pinCode = ? where pEmail = ?";
+        String sql = "UPDATE User SET fname = ?, lname = ?, houseNo = ?, state = ?, city = ?, country = ?, pinCode = ? where pEmail = ?";
 
         try {
             jdbcTemplate.update(sql, fname, lname, houseNo, state, city, country, pinCode, pEmail);

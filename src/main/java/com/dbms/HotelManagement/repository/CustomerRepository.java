@@ -38,10 +38,11 @@ public class CustomerRepository {
     }
 
     public void updateCustomer(UUID userID, String aadharNo, String alterEmail) {
-        String sql = "UPDATE Customer aadharNo = ?, alterEmail = ? where userID = ?";
+        System.out.println(userID + " " + aadharNo + " " +alterEmail);
+        String sql = "UPDATE Customer SET aadharCardNumber = ?, alternateEmailAddress = ? where userID = ?";
 
         try {
-            jdbcTemplate.update(sql, aadharNo, alterEmail, userID);
+            jdbcTemplate.update(sql, aadharNo, alterEmail, userID.toString());
         }
         catch (Exception e){
             System.out.println(e);
