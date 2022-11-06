@@ -28,6 +28,14 @@ public class GetBooking {
         this.membersList = membersList;
     }
 
+    public UUID getBookingID() {
+        return bookingID;
+    }
+
+    public void setBookingID(UUID bookingID) {
+        this.bookingID = bookingID;
+    }
+
     public String getCheckInDate() {
         return checkInDate;
     }
