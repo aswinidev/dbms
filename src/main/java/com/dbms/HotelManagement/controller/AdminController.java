@@ -105,19 +105,19 @@ public class AdminController {
     }
 
 //    TODO UNCOMMENT
-//    @GetMapping("/admin/allQuery")
-//    public List<ContactUs> allQuery() {
-//        return adminService.getQuery();
-//    }
+    @GetMapping("/admin/allQuery")
+    public List<ContactUs> allQuery() {
+        return adminService.getQuery();
+    }
 
-//    @PostMapping("/admin/addReply")
-//    public String addReply(@RequestBody ContactUs contactUs){
-//        UUID queryID = contactUs.getQueryID();
-//        String reply = contactUs.getReply();
-////        ContactUs query = adminService.getQueryByID(queryID);
-//        adminService.replyQuery(queryID,reply);
-//        return "Replied..";
-//    }
+    @PostMapping("/admin/addReply")
+    public String addReply(@RequestBody ContactUs contactUs){
+        UUID queryID = contactUs.getQueryID();
+        String reply = contactUs.getReply();
+//        ContactUs query = adminService.getQueryByID(queryID);
+        adminService.replyQuery(queryID,reply);
+        return "Replied..";
+    }
 
     @PostMapping("/admin/paySalary")
     public int paySalary(@RequestBody LeavesSalaries leavesSalaries){

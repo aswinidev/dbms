@@ -34,7 +34,7 @@ public class ContactUsRepository {
     }
 
     public void replyQuery(UUID queryID, String reply) {
-        String sql = "UPDATE ContactUs reply = ? WHERE queryID = ?";
+        String sql = "UPDATE ContactUs SET reply = ? WHERE queryID = ?";
         jdbcTemplate.update(sql,reply,queryID.toString());
     }
 
