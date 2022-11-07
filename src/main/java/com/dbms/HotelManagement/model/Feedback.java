@@ -19,7 +19,7 @@ public class Feedback {
         this.suggestions = suggestions;
         this.fDate = date;
         this.fTime = time;
-        this.bookingID = bookingID;1
+        this.bookingID = bookingID;
     }
 
     public UUID getFeedbackID() {

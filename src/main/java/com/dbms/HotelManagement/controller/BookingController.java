@@ -2,7 +2,10 @@ package com.dbms.HotelManagement.controller;
 
 import com.dbms.HotelManagement.extraclass.GetBooking;
 import com.dbms.HotelManagement.extraclass.TempBooking1;
+import com.dbms.HotelManagement.jsonResponse.GenerateBill;
+import com.dbms.HotelManagement.jsonResponse.IntPrice;
 import com.dbms.HotelManagement.model.*;
+import com.dbms.HotelManagement.service.BillService;
 import com.dbms.HotelManagement.service.BookingService;
 import com.dbms.HotelManagement.service.DashboardService;
 import com.dbms.HotelManagement.service.MemberService;
@@ -12,6 +15,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,11 +27,13 @@ public class BookingController {
 
     private final BookingService bookingService;
     private final MemberService memberService;
+    private final BillService billService;
     private final DashboardService dashboardService;
     @Autowired
-    public BookingController(BookingService bookingService, MemberService memberService, DashboardService dashboardService) {
+    public BookingController(BookingService bookingService, MemberService memberService, BillService billService, DashboardService dashboardService) {
         this.bookingService = bookingService;
         this.memberService = memberService;
+        this.billService = billService;
         this.dashboardService = dashboardService;
     }
 
@@ -46,7 +54,7 @@ public class BookingController {
 
     }
     @PostMapping("/booking/book")
-    public String bookRoom(@RequestBody GetBooking booking) {
+    public GenerateBill bookRoom(@RequestBody GetBooking booking) {
 //        System.out.println(booking.getMembersList());
         System.out.println(booking.getMembersList().get(0).getAadharNo());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -59,9 +67,20 @@ public class BookingController {
         String checkOutDate = booking.getCheckOutDate();
         System.out.println(checkInDate);
         System.out.println(booking.getSingleRoom());
-        UUID bookingID = bookingService.book(customerID, checkInDate, checkOutDate, booking.getSingleRoom(), booking.getDoubleRoom());
+        UUID bookingID = UUID.randomUUID();
+        IntPrice p = bookingService.book(bookingID, customerID, checkInDate, checkOutDate, booking.getSingleRoom(), booking.getDoubleRoom());
         int r = memberService.addMember(bookingID, booking.getCountMember(), booking.getMembersList());
-        return "booking successful";
+        UUID billID = UUID.randomUUID();
+        int singlePrice = p.getSinglePrice();
+        int doublePrice = p.getDoublePrice();
+        int amount = singlePrice*booking.getSingleRoom() + doublePrice*booking.getDoubleRoom();
+
+        GenerateBill generateBill = new GenerateBill(billID, bookingID, amount, booking.getSingleRoom(), booking.getDoubleRoom(), singlePrice, doublePrice, user.getFname(), user.getLname());
+//        Bill bill = new Bill(billID, bookingID, amount,)
+        LocalDate date = LocalDate.now(ZoneId.of("Asia/Kolkata"));
+        LocalTime time = LocalTime.now(ZoneId.of("Asia/Kolkata"));
+        billService.addBill(billID, bookingID, amount, date, time);
+        return generateBill;
     }
 
     @GetMapping("/customer/booking")
