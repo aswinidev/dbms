@@ -72,7 +72,7 @@ public class BookingController {
 
         User user = dashboardService.getDetails(pEmail);
         Customer cust = dashboardService.getCust(user.getUserID());
-        cust = dashboardService.getCust(user.getUserID());
+//        cust = dashboardService.getCust(user.getUserID());
 
         List<GetBooking> b =  bookingService.getBookings(cust.getCustomerID());
         System.out.println(b.size() + " " + b.get(0).getCheckOutDate() + " " + b.get(0).getCountMember());

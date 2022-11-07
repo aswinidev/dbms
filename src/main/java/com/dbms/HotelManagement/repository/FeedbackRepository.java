@@ -1,10 +1,13 @@
 package com.dbms.HotelManagement.repository;
 
 import com.dbms.HotelManagement.model.Feedback;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,13 +21,13 @@ public class FeedbackRepository {
 
     public List<Feedback> getAllFeedback() {
         String sql = "SELECT * FROM Feedback";
-        List<Feedback> allFeedback = jdbcTemplate.query(sql, new Object[]{}, FeedbackMapper());
+        List<Feedback> allFeedback = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<>(Feedback.class));
         return allFeedback;
     }
 
-    public void addFeedback(UUID feedbackID, String reviews, String suggestions, String date, String time, UUID customerID){
-        String sql = "INSERT INTO Feedback(feedbackID, review, suggestions, date, time, customerID) VALUES (?,?,?,?,?,?)";
-        jdbcTemplate.update(feedbackID.toString(), reviews, suggestions, date, time, customerID.toString());
+    public void addFeedback(UUID feedbackID, String reviews, String suggestions, LocalDate date, LocalTime time, UUID bookingID){
+        String sql = "INSERT INTO Feedback(feedbackID, reviews, suggestions, fDate, fTime, bookingID) VALUES (?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, feedbackID.toString(), reviews, suggestions, date, time, bookingID.toString());
     }
 
     private RowMapper<Feedback> FeedbackMapper() {
