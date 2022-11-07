@@ -15,16 +15,16 @@ public class AdminService {
     private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
     private final FeedbackRepository feedbackRepository;
-//    private final ContactUsRepository contactUsRepository;
+    private final ContactUsRepository contactUsRepository;
 //    private final SalaryRepository salaryRepository;
 
     private final LeavesSalariesRepository leavesSalariesRepository;
     @Autowired
-    public AdminService(UserRepository userRepository, EmployeeRepository employeeRepository, FeedbackRepository feedbackRepository, LeavesSalariesRepository salaryRepository) {
+    public AdminService(UserRepository userRepository, EmployeeRepository employeeRepository, FeedbackRepository feedbackRepository, ContactUsRepository contactUsRepository, LeavesSalariesRepository salaryRepository) {
         this.userRepository = userRepository;
         this.employeeRepository = employeeRepository;
         this.feedbackRepository = feedbackRepository;
-//        this.contactUsRepository = contactUsRepository;
+        this.contactUsRepository = contactUsRepository;
         this.leavesSalariesRepository = salaryRepository;
     }
 
@@ -45,17 +45,17 @@ public class AdminService {
         return feedbackRepository.getAllFeedback();
     }
 //
-//    public List<ContactUs> getQuery() {
-//        return contactUsRepository.getAllQuery();
-//    }
+    public List<ContactUs> getQuery() {
+        return contactUsRepository.getAllQuery();
+    }
 //
-//    public ContactUs getQueryByID(UUID queryID) {
-//        return contactUsRepository.getQueryByID(queryID);
-//    }
-//
-//    public void replyQuery(UUID queryID, String reply) {
-//        contactUsRepository.replyQuery(queryID, reply);
-//    }
+    public ContactUs getQueryByID(UUID queryID) {
+        return contactUsRepository.getQueryByID(queryID);
+    }
+
+    public void replyQuery(UUID queryID, String reply) {
+        contactUsRepository.replyQuery(queryID, reply);
+    }
 
     public void addSalary(int salaryPaid, UUID empID, int month, int year, int leavesAllowed, int leavesTaken) {
         leavesSalariesRepository.addLeavesSalaries(empID, salaryPaid, month, year, leavesAllowed, leavesTaken);
