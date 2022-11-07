@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -38,8 +39,11 @@ public class DashboardController {
 
         User user = dashboardService.getDetails(pEmail);
         Employee emp = dashboardService.getEmp(user.getUserID());
+        System.out.println(emp.getUserID());
         System.out.println(emp);
-        user.setIsEmp(user.getUserID() == emp.getUserID());
+        if(emp.getUserID() != null){
+            user.setIsEmp(true);
+        }
         return user;
     }
 
@@ -63,7 +67,7 @@ public class DashboardController {
 
         User user = dashboardService.getDetails(pEmail);
         Customer cust = dashboardService.getCust(user.getUserID());
-        cust = dashboardService.getCust(user.getUserID());
+//        cust = dashboardService.getCust(user.getUserID());
         return cust;
     }
 
@@ -72,7 +76,7 @@ public class DashboardController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails obj = (UserDetails) auth.getPrincipal();
         String pEmail = obj.getUsername();
-
+        System.out.println(pEmail);
         User user = dashboardService.getDetails(pEmail);
         Customer cust = dashboardService.getCust(user.getUserID());
         cust = dashboardService.getCust(user.getUserID());

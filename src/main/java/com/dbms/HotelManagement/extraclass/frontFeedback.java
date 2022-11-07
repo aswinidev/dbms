@@ -1,25 +1,25 @@
-package com.dbms.HotelManagement.model;
+package com.dbms.HotelManagement.extraclass;
 
 import java.util.UUID;
 
-public class Feedback {
+public class frontFeedback {
     private UUID feedbackID;
     private String reviews;
     private String suggestions;
     private String fDate;
     private String fTime;
-    private UUID bookingID;
+    private String bookingID;
 
-    public Feedback() {
+    public frontFeedback() {
     }
 
-    public Feedback(UUID feedbackID, String reviews, String suggestions, String date, String time, UUID bookingID) {
+    public frontFeedback(UUID feedbackID, String reviews, String suggestions, String date, String time, String bookingID) {
         this.feedbackID = feedbackID;
         this.reviews = reviews;
         this.suggestions = suggestions;
         this.fDate = date;
         this.fTime = time;
-        this.bookingID = bookingID;1
+        this.bookingID = bookingID;
     }
 
     public UUID getFeedbackID() {
@@ -62,11 +62,11 @@ public class Feedback {
         this.fTime = time;
     }
 
-    public UUID getBookingID() {
+    public String getBookingID() {
         return bookingID;
     }
 
-    public void setBookingID(UUID bookingID) {
+    public void setBookingID(String bookingID) {
         this.bookingID = bookingID;
     }
 }
