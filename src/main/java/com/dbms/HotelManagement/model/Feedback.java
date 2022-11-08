@@ -46,19 +46,19 @@ public class Feedback {
         this.suggestions = suggestions;
     }
 
-    public String getDate() {
+    public String getfDate() {
         return fDate;
     }
 
-    public void setDate(String date) {
+    public void setfDate(String date) {
         this.fDate = date;
     }
 
-    public String getTime() {
+    public String getfTime() {
         return fTime;
     }
 
-    public void setTime(String time) {
+    public void setfTime(String time) {
         this.fTime = time;
     }
 
