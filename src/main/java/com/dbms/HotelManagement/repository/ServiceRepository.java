@@ -21,9 +21,9 @@ public class ServiceRepository {
 
 
     public int addService(String serviceName, boolean availability, float price, UUID headedBy) {
-        String sql = "INSERT INTO Services(serviceName, availability, price, headedBy) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Service(serviceName, availability, price, headedBy) VALUES (?, ?, ?, ?)";
 
-        return jdbcTemplate.update(sql, serviceName, availability, price, headedBy);
+        return jdbcTemplate.update(sql, serviceName, availability, price, headedBy.toString());
     }
 
     public Service getServiceByName(String serviceName){

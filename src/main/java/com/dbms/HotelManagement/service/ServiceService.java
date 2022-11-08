@@ -4,6 +4,7 @@ import com.dbms.HotelManagement.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,5 +28,9 @@ public class ServiceService {
         serviceRepository.updatePrice(serviceName, price);
         serviceRepository.updateAvailabilty(serviceName, isAvailable);
         serviceRepository.updateHeadedBy(serviceName, head);
+    }
+
+    public List<com.dbms.HotelManagement.model.Service> getServices(){
+        return serviceRepository.getAllService();
     }
 }
