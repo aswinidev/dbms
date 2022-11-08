@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.controller;
 
+import com.dbms.HotelManagement.jsonResponse.SalaryPhoneNo;
 import com.dbms.HotelManagement.jsonResponse.UserEmployee;
 import com.dbms.HotelManagement.model.*;
 import com.dbms.HotelManagement.service.*;
@@ -99,7 +100,7 @@ public class AdminController {
         int leavesAllowed = userEmployee.getLeavesAllowed();
         int leavesTaken = 0;
 
-        adminService.addSalary(salary, empID, month, year, leavesAllowed, leavesTaken);
+        adminService.addSalary(-1, empID, month, year, leavesAllowed, leavesTaken);
         phoneNoService.addNo(userID, userEmployee.getPhoneNo());
 
         return "Added Employee";
@@ -129,23 +130,35 @@ public class AdminController {
     @PostMapping("/admin/paySalary")
     public int paySalary(@RequestBody LeavesSalaries leavesSalaries){
         Employee emp= dashboardService.getEmp(leavesSalaries.getEmpID());
-        return leavesSalariesService.paySalary(leavesSalaries.getEmpID(), leavesSalaries.getMonth(), leavesSalaries.getYear(), emp.getSalary(), leavesSalaries.getLeavesAllowed());
+        int sal = emp.getSalary();
+        System.out.println(sal);
+        if(leavesSalaries.getLeavesAllowed()<leavesSalaries.getLeavesTaken()){
+            sal = 500*(leavesSalaries.getLeavesTaken()-leavesSalaries.getLeavesAllowed());
+        }
+        System.out.println(sal);
+        return leavesSalariesService.paySalary(leavesSalaries.getEmpID(), leavesSalaries.getMonth(), leavesSalaries.getYear(), Math.max(sal, 0), leavesSalaries.getLeavesAllowed());
     }
 
     @PostMapping("/admin/getLeavesSalaries")
-    public LeavesSalaries getLeavesSalaries(@RequestBody Employee employee){
+    public SalaryPhoneNo getLeavesSalaries(@RequestBody UserEmployee employee){
         UUID empID = employee.getEmpID();
         System.out.println(empID);
         Calendar c = Calendar.getInstance();
         int month = c.get(Calendar.MONTH) + 1;
         int year = c.get(Calendar.YEAR);
-        return leavesSalariesService.getLeavesSalaries(empID, month , year);
 
+        LeavesSalaries l = leavesSalariesService.getLeavesSalaries(empID, month , year);
+        SalaryPhoneNo salPhone = new SalaryPhoneNo(l.getSalaryPaid(), l.getEmpID(), l.getMonth(), l.getYear(), l.getLeavesAllowed(), l.getLeavesTaken());
+        String s = phoneNoService.getPhoneNo(employee.getUserID());
+        salPhone.setPhoneNo(s);
+        return salPhone;
     }
 
     @PostMapping("/admin/addLeave")
-    public int addLeave(@RequestBody LeavesSalaries leavesSalaries){
-        return leavesSalariesService.addLeave(leavesSalaries.getEmpID(), leavesSalaries.getLeavesTaken());
+    public LeavesSalaries addLeave(@RequestBody LeavesSalaries leavesSalaries){
+        int i = leavesSalariesService.addLeave(leavesSalaries.getEmpID(), leavesSalaries.getLeavesTaken());
+        leavesSalaries.setLeavesTaken(leavesSalaries.getLeavesTaken()+1);
+        return leavesSalaries;
     }
 
 }

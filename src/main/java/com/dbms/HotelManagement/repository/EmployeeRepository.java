@@ -25,17 +25,9 @@ public class EmployeeRepository {
 //        return jdbcTemplate.update(sql, empID.toString(), currHouseNo, currPincode, currCity, currState, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID);
 //    }
 
-    public Employee getEmployee(String userID){
-        String sql = "Select * from Employee where userID = ?";
-        try{
-            Employee e = jdbcTemplate.queryForObject(sql, new Object[] {userID}, new BeanPropertyRowMapper<>(Employee.class));
-            return e;
-        }
-        catch (Exception e){
-            System.out.println(e);
-            return new Employee();
-        }
-
+    public Employee getEmployee(String empID){
+        String sql = "Select * from Employee where empID = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{empID}, new BeanPropertyRowMapper<>(Employee.class));
     }
 
     public List<Employee> getAllEmployee() {
@@ -86,7 +78,6 @@ public class EmployeeRepository {
 
     private RowMapper<UserEmployee> UserEmployeeMapper() {
         return (resultSet, i) -> {
-            System.out.println(resultSet.getInt("salary"));
             return new UserEmployee(
                     UUID.fromString(resultSet.getString("empID")),
                     resultSet.getString("houseNo"),

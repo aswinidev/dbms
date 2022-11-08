@@ -30,6 +30,12 @@ public class UserRepository {
 //        }
     }
 
+    public void deleteUser(UUID userID){
+        String sql = "DELETE FROM User where userID = ?";
+
+        jdbcTemplate.update(sql, userID.toString());
+    }
+
 
     public User getUser(String pEmail) {
         String sql = "SELECT * FROM User WHERE pEmail = ?";

@@ -27,7 +27,7 @@ public class LeavesSalariesService {
     }
 
     public int paySalary(UUID empID, int month, int year, int salary,int leavesAllowed){
-        leavesSalariesRepository.paySalary(empID, month, year, salary);
+        int i = leavesSalariesRepository.paySalary(empID, month, year, salary);
         if(month == 12){
             month = 1;
             year = year+1;

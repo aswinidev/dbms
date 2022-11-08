@@ -27,13 +27,13 @@ public class LeavesSalariesRepository {
     }
 
     public int addLeave(UUID empID, int leavesTaken){
-        String sql = "UPDATE LeavesSalaries leavesTaken = ? WHERE empID = ?";
+        String sql = "UPDATE LeavesSalaries set leavesTaken = ? WHERE empID = ?";
         return jdbcTemplate.update(sql, leavesTaken, empID.toString());
     }
 
     public int paySalary(UUID empID, int month, int year, int paidSalary){
-        String sql = "UPDATE LeavesSalaries salaryPaid = ? where empID = ? AND month = ? AND year = ?";
-        return jdbcTemplate.update(sql, paidSalary);
+        String sql = "UPDATE LeavesSalaries set salaryPaid = ? where empID = ? AND month = ? AND year = ?";
+        return jdbcTemplate.update(sql, paidSalary, empID.toString(), month, year);
 
     }
 }

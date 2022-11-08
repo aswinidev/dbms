@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.service;
 
+import com.dbms.HotelManagement.model.UserPhoneNumber;
 import com.dbms.HotelManagement.repository.PhoneNoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,15 @@ public class PhoneNoService {
         for(int i = 0;i<phoneNos.size();i++){
             phoneNoRepository.addNo(userID, phoneNos.get(i));
         }
+    }
+
+    public String getPhoneNo(UUID userID){
+        List<UserPhoneNumber> phoneNos = phoneNoRepository.getNo(userID);
+        String s = "";
+        for(int i =0;i<phoneNos.size();i++){
+            s += phoneNos.get(i).getPhoneNumber();
+            s += ", ";
+        }
+        return s;
     }
 }
