@@ -12,6 +12,7 @@ public class UserEmployee {
     private String currPincode;
     private String currCity;
     private String currState;
+    private String phoneNo;
     private String maritalStatus;
     private String panCard;
     private String accountNo;
@@ -28,6 +29,74 @@ public class UserEmployee {
     private String gender;
     private int salary;
     private int leavesAllowed;
+
+
+    public UserEmployee(UUID empID, String houseNo, String pincode, String city, String state, String currHouseNo, String currPincode, String currCity, String currState, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, String superID, String fname, String lname, String pEmail, String pswd, String country, String gender, int salary) {
+        this.empID = empID;
+        this.houseNo = houseNo;
+        this.pincode = pincode;
+        this.city = city;
+        this.state = state;
+        this.currHouseNo = currHouseNo;
+        this.currPincode = currPincode;
+        this.currCity = currCity;
+        this.currState = currState;
+        this.maritalStatus = maritalStatus;
+        this.panCard = panCard;
+        this.accountNo = accountNo;
+        this.IFSCCode = IFSCCode;
+        this.bankName = bankName;
+        this.userID = userID;
+        this.deptName = deptName;
+        this.superID = superID;
+        this.fname = fname;
+        this.lname = lname;
+        this.pEmail = pEmail;
+        this.pswd = pswd;
+        this.country = country;
+        this.gender = gender;
+        this.salary = salary;
+    }
+
+    public UserEmployee() {
+    }
+
+    public UserEmployee(UUID empID, String houseNo, String pincode, String city, String state, String currHouseNo, String currPincode, String currCity, String currState, String phoneNo, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, String superID, String fname, String lname, String pEmail, String pswd, String country, String gender, int salary, int leavesAllowed) {
+        this.empID = empID;
+        this.houseNo = houseNo;
+        this.pincode = pincode;
+        this.city = city;
+        this.state = state;
+        this.currHouseNo = currHouseNo;
+        this.currPincode = currPincode;
+        this.currCity = currCity;
+        this.currState = currState;
+        this.phoneNo = phoneNo;
+        this.maritalStatus = maritalStatus;
+        this.panCard = panCard;
+        this.accountNo = accountNo;
+        this.IFSCCode = IFSCCode;
+        this.bankName = bankName;
+        this.userID = userID;
+        this.deptName = deptName;
+        this.superID = superID;
+        this.fname = fname;
+        this.lname = lname;
+        this.pEmail = pEmail;
+        this.pswd = pswd;
+        this.country = country;
+        this.gender = gender;
+        this.salary = salary;
+        this.leavesAllowed = leavesAllowed;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
 
     public int getSalary() {
         return salary;

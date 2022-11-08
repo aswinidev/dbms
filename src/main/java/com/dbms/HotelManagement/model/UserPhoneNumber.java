@@ -6,6 +6,14 @@ public class UserPhoneNumber {
     private String phoneNumber;
     private UUID userID;
 
+    public UserPhoneNumber() {
+    }
+
+    public UserPhoneNumber(String phoneNumber, UUID userID) {
+        this.phoneNumber = phoneNumber;
+        this.userID = userID;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

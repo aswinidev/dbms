@@ -2,10 +2,7 @@ package com.dbms.HotelManagement.controller;
 
 import com.dbms.HotelManagement.jsonResponse.UserEmployee;
 import com.dbms.HotelManagement.model.*;
-import com.dbms.HotelManagement.service.AdminService;
-import com.dbms.HotelManagement.service.AuthenticationService;
-import com.dbms.HotelManagement.service.DashboardService;
-import com.dbms.HotelManagement.service.LeavesSalariesService;
+import com.dbms.HotelManagement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -24,22 +21,28 @@ public class AdminController {
 //    private final
     private final PasswordEncoder passwordEncoder;
     private final LeavesSalariesService leavesSalariesService;
+    private final PhoneNoService phoneNoService;
 
     @Autowired
-    public AdminController(AdminService adminService, AuthenticationService authenticationService, DashboardService dashboardService, PasswordEncoder passwordEncoder, LeavesSalariesService leavesSalariesService) {
+    public AdminController(AdminService adminService, AuthenticationService authenticationService, DashboardService dashboardService, PasswordEncoder passwordEncoder, LeavesSalariesService leavesSalariesService, PhoneNoService phoneNoService) {
         this.adminService = adminService;
         this.authenticationService = authenticationService;
         this.dashboardService = dashboardService;
         this.passwordEncoder = passwordEncoder;
         this.leavesSalariesService = leavesSalariesService;
+        this.phoneNoService = phoneNoService;
+
     }
 
     // TODO make another model that would contain the attributes of both user and employee
     // TODO add on Delete cascade in sql user table
 
     @GetMapping("/admin/allEmployee")
-    public List<Employee> allEmployee(){
-        return adminService.getEmployees();
+    public List<UserEmployee> allEmployee(){
+        List<UserEmployee> u = adminService.getEmployees();
+        System.out.println(u.get(0).getSalary());
+
+        return u;
     }
 
 
@@ -52,6 +55,8 @@ public class AdminController {
 
     @PostMapping("/admin/addEmployee")
     public String addEmployee(@RequestBody UserEmployee userEmployee){
+        System.out.println(userEmployee.getPincode());
+        System.out.println(userEmployee.getCurrPincode());
         UUID userID = UUID.randomUUID();
         String fname = userEmployee.getFname();
         String lname = userEmployee.getLname();
@@ -63,6 +68,7 @@ public class AdminController {
         String country = userEmployee.getCountry();
         String pinCode = userEmployee.getPincode();
         String gender = userEmployee.getGender();
+        System.out.println(userID);
         authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
         // Employee Details
         // UUID empID, String houseNo, String pincode, String city, String state, String maritalStatus, String panCard, String accountNo, String IFSCCode, String bankName, UUID userID, String deptName, UUID superID
@@ -94,6 +100,7 @@ public class AdminController {
         int leavesTaken = 0;
 
         adminService.addSalary(salary, empID, month, year, leavesAllowed, leavesTaken);
+        phoneNoService.addNo(userID, userEmployee.getPhoneNo());
 
         return "Added Employee";
     }
@@ -126,7 +133,9 @@ public class AdminController {
     }
 
     @PostMapping("/admin/getLeavesSalaries")
-    public LeavesSalaries getLeavesSalaries(@RequestBody UUID empID){
+    public LeavesSalaries getLeavesSalaries(@RequestBody Employee employee){
+        UUID empID = employee.getEmpID();
+        System.out.println(empID);
         Calendar c = Calendar.getInstance();
         int month = c.get(Calendar.MONTH) + 1;
         int year = c.get(Calendar.YEAR);
@@ -138,21 +147,5 @@ public class AdminController {
     public int addLeave(@RequestBody LeavesSalaries leavesSalaries){
         return leavesSalariesService.addLeave(leavesSalaries.getEmpID(), leavesSalaries.getLeavesTaken());
     }
-
-    
-//    @GetMapping("/admin/listCustomer")
-//    public List<Customer> allCustomer(){
-//        return
-//    }
-//
-//    @PostMapping("/admin/deleteCustomer")
-//    public String deleteCustomer(@RequestBody User user){
-//
-//    }
-//
-//    @PostMapping("/admin/addCustomer")
-//    public String addCustomer(@RequestBody UserCustomer userCustomer){
-//
-//    }
 
 }

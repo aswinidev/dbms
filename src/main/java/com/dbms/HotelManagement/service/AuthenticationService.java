@@ -23,6 +23,7 @@ public class AuthenticationService {
 
     public void register(UUID userID, String fname, String lname, String pEmail, String pswd, String houseNo, String state, String city, String country, String pinCode, String gender) {
         try {
+            System.out.println(userID.toString());
             userRepository.registerUser(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
 //            System.out.println(userID + " " + fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender);
         } catch (Exception e) {

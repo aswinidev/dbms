@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.service;
 
+import com.dbms.HotelManagement.jsonResponse.UserEmployee;
 import com.dbms.HotelManagement.model.ContactUs;
 import com.dbms.HotelManagement.model.Employee;
 import com.dbms.HotelManagement.model.Feedback;
@@ -37,8 +38,8 @@ public class AdminService {
         employeeRepository.addEmployee(employee.getEmpID(), employee.getCurrHouseNo(), employee.getCurrPincode(), employee.getCurrCity(), employee.getCurrState(), employee.getMaritalStatus(), employee.getSalary(), employee.getPanCard(), employee.getAccountNo(), employee.getIFSCCode(), employee.getBankName(), employee.getUserID(), employee.getDeptName(), employee.getSuperID());
     }
 
-    public List<Employee> getEmployees() {
-        return employeeRepository.getAllEmployee();
+    public List<UserEmployee> getEmployees() {
+        return employeeRepository.getAllUserEmployee();
     }
 
     public List<Feedback> getFeedback() {
