@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.repository;
 
+import com.dbms.HotelManagement.jsonResponse.UserEmployee;
 import com.dbms.HotelManagement.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -51,8 +52,9 @@ public class EmployeeRepository {
     public List<Employee> getSubord( UUID empID)
     {
         String sql="SELECT * FROM Employee WHERE superID=?";
-        return jdbcTemplate.query(sql, new Object[]{empID.toString()}, EmployeeMapper());
-
+        List<Employee> u= jdbcTemplate.query(sql, new Object[]{empID.toString()}, EmployeeMapper());
+        System.out.println(u.get(0).getSalary());
+        return u;
     }
 
     private RowMapper<Employee> EmployeeMapper() {
@@ -72,6 +74,44 @@ public class EmployeeRepository {
                     UUID.fromString(resultSet.getString("userID")),
                     resultSet.getString("deptName"),
                     UUID.fromString(resultSet.getString("superID"))
+            );
+        };
+    }
+
+    public List<UserEmployee> getAllUserEmployee() {
+        String sql = "SELECT empID, houseNo, pincode, city, state, currHouseNo, currPincode, currCity, currState, maritalStatus, panCard, accountNo, IFSCCode, bankName, e.userID, deptName, superID, fname,lname, pEmail, pswd, country, gender, salary from Employee as e, User as u where u.userID = e.userID";
+
+        return jdbcTemplate.query(sql, new Object[]{}, UserEmployeeMapper());
+    }
+
+    private RowMapper<UserEmployee> UserEmployeeMapper() {
+        return (resultSet, i) -> {
+            System.out.println(resultSet.getInt("salary"));
+            return new UserEmployee(
+                    UUID.fromString(resultSet.getString("empID")),
+                    resultSet.getString("houseNo"),
+                    resultSet.getString("pincode"),
+                    resultSet.getString("city"),
+                    resultSet.getString("state"),
+                    resultSet.getString("currHouseNo"),
+                    resultSet.getString("currPincode"),
+                    resultSet.getString("currCity"),
+                    resultSet.getString("currState"),
+                    resultSet.getString("maritalStatus"),
+                    resultSet.getString("panCard"),
+                    resultSet.getString("accountNo"),
+                    resultSet.getString("IFSCCode"),
+                    resultSet.getString("bankName"),
+                    UUID.fromString(resultSet.getString("userID")),
+                    resultSet.getString("deptName"),
+                    resultSet.getString("superID"),
+                    resultSet.getString("fname"),
+                    resultSet.getString("lname"),
+                    resultSet.getString("pEmail"),
+                    resultSet.getString("pswd"),
+                    resultSet.getString("country"),
+                    resultSet.getString("gender"),
+                    resultSet.getInt("salary")
             );
         };
     }
