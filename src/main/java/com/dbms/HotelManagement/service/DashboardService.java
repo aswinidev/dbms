@@ -35,6 +35,7 @@ public class DashboardService {
         return emp;
     }
 
+
     public Customer getCust(UUID userID) {
         Customer cust = custRepository.getCustomer(userID.toString());
         return cust;
@@ -46,5 +47,9 @@ public class DashboardService {
 
     public void updateCustomer(UUID userID, String aadharNo, String alterEmail) {
         custRepository.updateCustomer(userID, aadharNo, alterEmail);
+    }
+
+    public Employee getEmpByEmpID(UUID empID) {
+        return empRepository.getEmployeeByEmpID(empID.toString());
     }
 }

@@ -1,9 +1,12 @@
 package com.dbms.HotelManagement.repository;
 
+import com.dbms.HotelManagement.jsonResponse.ServicesEmp;
+import com.dbms.HotelManagement.model.Employee;
 import com.dbms.HotelManagement.model.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -33,15 +36,26 @@ public class ServiceRepository {
 
     }
 
-    public List<Service> getAllService(){
-        String sql = "Select * FROM Service";
+    public List<ServicesEmp> getAllService(){
+        String sql = "Select pEmail, price, availability, serviceName FROM Service, Employee as e, User as u where e.empID = headedBy and e.userID = u.userID";
         try{
-           return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Service.class));
+           return jdbcTemplate.query(sql,new Object[]{}, ServicesEmpMapper());
         }
         catch ( Exception e){
             System.out.println(e);
-            return new ArrayList<Service>();
+            return new ArrayList<ServicesEmp>();
         }
+    }
+
+    public RowMapper<ServicesEmp> ServicesEmpMapper() {
+        return (resultSet, i) -> {
+            return new ServicesEmp(
+                    resultSet.getString("serviceName"),
+                    resultSet.getBoolean("availability"),
+                    resultSet.getInt("price"),
+                    resultSet.getString("pEmail")
+            );
+        };
     }
 
     public int updateAvailabilty(String serviceName, boolean availability){
@@ -66,4 +80,6 @@ public class ServiceRepository {
         String sql = "DELETE FROM Service WHERE serviceName = ?";
         return jdbcTemplate.update(sql);
     }
+
+
 }

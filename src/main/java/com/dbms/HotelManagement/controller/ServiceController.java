@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.controller;
 
+import com.dbms.HotelManagement.jsonResponse.ServicesEmp;
 import com.dbms.HotelManagement.model.Service;
 import com.dbms.HotelManagement.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class ServiceController {
     }
 
     @GetMapping("/admin/service")
-    public List<Service> allServices(){
+    public List<ServicesEmp> allServices(){
         return serviceService.getServices();
     }
 

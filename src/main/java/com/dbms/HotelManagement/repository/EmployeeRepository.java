@@ -24,8 +24,19 @@ public class EmployeeRepository {
 //        String sql = "INSERT INTO Employee(empID, currHouseNo, currPincode, currCity, currState, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 //        return jdbcTemplate.update(sql, empID.toString(), currHouseNo, currPincode, currCity, currState, maritalStatus, panCard, accountNo, IFSCCode, bankName, userID, deptName, superID);
 //    }
+    public Employee getEmployee(String userID){
+        String sql = "Select * from Employee where userID = ?";
+        try{
 
-    public Employee getEmployee(String empID){
+            return jdbcTemplate.queryForObject(sql, new Object[]{userID}, new BeanPropertyRowMapper<>(Employee.class));
+        }
+        catch (Exception e){
+            System.out.println(e);
+            return new Employee();
+        }
+    }
+
+    public Employee getEmployeeByEmpID(String empID){
         String sql = "Select * from Employee where empID = ?";
         return jdbcTemplate.queryForObject(sql, new Object[]{empID}, new BeanPropertyRowMapper<>(Employee.class));
     }
@@ -41,10 +52,10 @@ public class EmployeeRepository {
         jdbcTemplate.update(sql, empID.toString(), houseNo, pincode, city, state, maritalStatus, salary, panCard, accountNo, IFSCCode, bankName, userID.toString(), deptName, superID.toString());
     }
 
-    public List<Employee> getSubord( UUID empID)
+    public List<UserEmployee> getSubord( UUID empID)
     {
-        String sql="SELECT * FROM Employee WHERE superID=?";
-        List<Employee> u= jdbcTemplate.query(sql, new Object[]{empID.toString()}, EmployeeMapper());
+        String sql="SELECT * FROM Employee as e, User as u WHERE superID=? AND u.userID = e.userID";
+        List<UserEmployee> u= jdbcTemplate.query(sql, new Object[]{empID.toString()}, UserEmployeeMapper());
         System.out.println(u.get(0).getSalary());
         return u;
     }

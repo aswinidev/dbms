@@ -30,7 +30,7 @@ public class ServiceService {
         serviceRepository.updateHeadedBy(serviceName, head);
     }
 
-    public List<com.dbms.HotelManagement.model.Service> getServices(){
+    public List<com.dbms.HotelManagement.jsonResponse.ServicesEmp> getServices(){
         return serviceRepository.getAllService();
     }
 }
