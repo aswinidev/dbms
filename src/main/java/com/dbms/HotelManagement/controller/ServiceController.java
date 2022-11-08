@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.controller;
 
+import com.dbms.HotelManagement.extraclass.GetBooking;
 import com.dbms.HotelManagement.jsonResponse.ServicesEmp;
 import com.dbms.HotelManagement.model.Service;
 import com.dbms.HotelManagement.service.ServiceService;
@@ -31,18 +32,26 @@ public class ServiceController {
         return serviceService.deleteService(serviceName);
     }
 
-    @PostMapping("/admin/updateService")
-    public String updateService(@RequestBody Service service){
-
-        serviceService.updateService(service.getServiceName(), service.getPrice(), service.isAvailability(), service.getHeadedBy());
-
-
-        return "Success";
-    }
-
     @GetMapping("/admin/service")
     public List<ServicesEmp> allServices(){
         return serviceService.getServices();
     }
 
+    @GetMapping("/booking/services")
+    public List<Service> serviceNames() {
+        return serviceService.serviceNames();
+    }
+    @PostMapping("/admin/alterAvail")
+    public List<ServicesEmp> changeAvail(@RequestBody ServicesEmp servicesEmp){
+        servicesEmp.setAvailability(!servicesEmp.isAvailability());
+        serviceService.updateService(servicesEmp.getServiceName(), servicesEmp.getPrice(), servicesEmp.isAvailability());
+        return serviceService.getServices();
+    }
+
+    @PostMapping("/booked/services")
+    public String getServices(@RequestBody GetBooking getBooking){
+        System.out.println(getBooking.getBookingID());
+        return serviceService.getBookingServices(getBooking.getBookingID());
+
+    }
 }

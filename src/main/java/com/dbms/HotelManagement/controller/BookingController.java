@@ -5,10 +5,7 @@ import com.dbms.HotelManagement.extraclass.TempBooking1;
 import com.dbms.HotelManagement.jsonResponse.GenerateBill;
 import com.dbms.HotelManagement.jsonResponse.IntPrice;
 import com.dbms.HotelManagement.model.*;
-import com.dbms.HotelManagement.service.BillService;
-import com.dbms.HotelManagement.service.BookingService;
-import com.dbms.HotelManagement.service.DashboardService;
-import com.dbms.HotelManagement.service.MemberService;
+import com.dbms.HotelManagement.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,12 +26,15 @@ public class BookingController {
     private final MemberService memberService;
     private final BillService billService;
     private final DashboardService dashboardService;
+    private final ServiceService serviceService;
+
     @Autowired
-    public BookingController(BookingService bookingService, MemberService memberService, BillService billService, DashboardService dashboardService) {
+    public BookingController(BookingService bookingService, MemberService memberService, BillService billService, DashboardService dashboardService, ServiceService serviceService) {
         this.bookingService = bookingService;
         this.memberService = memberService;
         this.billService = billService;
         this.dashboardService = dashboardService;
+        this.serviceService = serviceService;
     }
 
     @PostMapping("/booking/check")
@@ -56,6 +56,7 @@ public class BookingController {
     @PostMapping("/booking/book")
     public GenerateBill bookRoom(@RequestBody GetBooking booking) {
 //        System.out.println(booking.getMembersList());
+        System.out.println(booking.getServices());
         System.out.println(booking.getMembersList().get(0).getAadharNo());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails obj = (UserDetails) auth.getPrincipal();
@@ -70,6 +71,7 @@ public class BookingController {
         UUID bookingID = UUID.randomUUID();
         IntPrice p = bookingService.book(bookingID, customerID, checkInDate, checkOutDate, booking.getSingleRoom(), booking.getDoubleRoom());
         int r = memberService.addMember(bookingID, booking.getCountMember(), booking.getMembersList());
+        serviceService.addusedService(booking.getServices(), bookingID);
         UUID billID = UUID.randomUUID();
         int singlePrice = p.getSinglePrice();
         int doublePrice = p.getDoublePrice();
@@ -91,8 +93,6 @@ public class BookingController {
 
         User user = dashboardService.getDetails(pEmail);
         Customer cust = dashboardService.getCust(user.getUserID());
-//        cust = dashboardService.getCust(user.getUserID());
-
         List<GetBooking> b =  bookingService.getBookings(cust.getCustomerID());
         System.out.println(b.size() + " " + b.get(0).getCheckOutDate() + " " + b.get(0).getCountMember());
         return b;

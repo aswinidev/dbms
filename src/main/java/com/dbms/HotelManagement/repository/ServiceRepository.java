@@ -3,6 +3,7 @@ package com.dbms.HotelManagement.repository;
 import com.dbms.HotelManagement.jsonResponse.ServicesEmp;
 import com.dbms.HotelManagement.model.Employee;
 import com.dbms.HotelManagement.model.Service;
+import com.dbms.HotelManagement.model.ServiceUsed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -58,20 +59,20 @@ public class ServiceRepository {
         };
     }
 
-    public int updateAvailabilty(String serviceName, boolean availability){
-        String sql = "UPDATE Service availablity = ? WHERE serviceName = ?";
+    public int updateAvailability(String serviceName, boolean availability){
+        String sql = "UPDATE Service set availability = ? WHERE serviceName = ?";
 
         return jdbcTemplate.update(sql, availability, serviceName);
     }
 
     public int updatePrice(String serviceName, int price){
-        String sql = "UPDATE Service price = ? WHERE serviceName = ?";
+        String sql = "UPDATE Service set price = ? WHERE serviceName = ?";
 
         return jdbcTemplate.update(sql, price, serviceName);
     }
 
     public int updateHeadedBy(String serviceName, UUID headedBy){
-        String sql = "UPDATE Service headedBy = ? WHERE serviceName = ?";
+        String sql = "UPDATE Service set headedBy = ? WHERE serviceName = ?";
 
         return jdbcTemplate.update(sql, headedBy.toString(), serviceName);
     }
@@ -82,4 +83,22 @@ public class ServiceRepository {
     }
 
 
+    public List<Service> serviceNames() {
+        String sql = "SELECT * from Service where availability = true";
+
+        return jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<>(Service.class));
+    }
+
+    public void addusedService(String serviceName, UUID custID){
+        String sql = "insert into ServiceUsed values (?,?)";
+        jdbcTemplate.update(sql, serviceName, custID.toString());
+
+    }
+
+    public List<ServiceUsed> getBookingServices(UUID bookingID) {
+        String sql = "SELECT * from ServiceUsed where bookingID = ?";
+        
+        return jdbcTemplate.query(sql, new Object[]{bookingID.toString()}, new BeanPropertyRowMapper<>(ServiceUsed.class));
+        
+    }
 }

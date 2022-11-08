@@ -123,7 +123,7 @@ public class BookingRepository {
         List<Booking> bookings=getBookings(custID);
         List<GetBooking> GetBookings = new ArrayList<>();
         for(int i=0;i<bookings.size();i++){
-            GetBooking getBook = new GetBooking(bookings.get(i).getBookingID(), bookings.get(i).getCheckInDate(), bookings.get(i).getCheckOutDate(), memberRepo.getCountMember(bookings.get(i).getBookingID()), numSingle(bookings.get(i).getBookingID()), numDouble(bookings.get(i).getBookingID()), new ArrayList<Member>());
+            GetBooking getBook = new GetBooking(bookings.get(i).getBookingID(), bookings.get(i).getCheckInDate(), bookings.get(i).getCheckOutDate(), memberRepo.getCountMember(bookings.get(i).getBookingID()), numSingle(bookings.get(i).getBookingID()), numDouble(bookings.get(i).getBookingID()), new ArrayList<Member>(), new ArrayList<>());
             GetBookings.add(getBook);
         }
         return GetBookings;
