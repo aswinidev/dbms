@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.service;
 
+import com.dbms.HotelManagement.jsonResponse.UserEmployee;
 import com.dbms.HotelManagement.model.Employee;
 import com.dbms.HotelManagement.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class EmployeeService {
         return employeeRepository.getAllEmployee();
     }
 
-    public List<Employee> getSubord(UUID empID) {
+    public List<UserEmployee> getSubord(UUID empID) {
         return employeeRepository.getSubord(empID);
     }
 }

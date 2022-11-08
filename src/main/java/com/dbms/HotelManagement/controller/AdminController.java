@@ -129,7 +129,7 @@ public class AdminController {
 
     @PostMapping("/admin/paySalary")
     public int paySalary(@RequestBody LeavesSalaries leavesSalaries){
-        Employee emp= dashboardService.getEmp(leavesSalaries.getEmpID());
+        Employee emp= dashboardService.getEmpByEmpID(leavesSalaries.getEmpID());
         int sal = emp.getSalary();
         System.out.println(sal);
         if(leavesSalaries.getLeavesAllowed()<leavesSalaries.getLeavesTaken()){
@@ -161,4 +161,10 @@ public class AdminController {
         return leavesSalaries;
     }
 
+    @PostMapping("/admin/getEmpByEmpID")
+    public String getEmpByEmpID(@RequestBody Employee employee){
+        Employee e = dashboardService.getEmpByEmpID(employee.getEmpID());
+        User u = dashboardService.getDetails(e.getUserID().toString());
+        return u.getpEmail();
+    }
 }

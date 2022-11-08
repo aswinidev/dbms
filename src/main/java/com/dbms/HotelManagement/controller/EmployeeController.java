@@ -1,5 +1,6 @@
 package com.dbms.HotelManagement.controller;
 
+import com.dbms.HotelManagement.jsonResponse.UserEmployee;
 import com.dbms.HotelManagement.model.Employee;
 import com.dbms.HotelManagement.model.User;
 import com.dbms.HotelManagement.service.AuthenticationService;
@@ -35,7 +36,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/dashboard/employee/subord")
-    public List<Employee> getSubord(){
+    public List<UserEmployee> getSubord(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserDetails obj = (UserDetails) auth.getPrincipal();
         String pEmail = obj.getUsername();
