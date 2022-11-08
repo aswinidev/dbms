@@ -1,6 +1,7 @@
 package com.dbms.HotelManagement.controller;
 
 import com.dbms.HotelManagement.jsonResponse.SalaryPhoneNo;
+import com.dbms.HotelManagement.jsonResponse.ServicesEmp;
 import com.dbms.HotelManagement.jsonResponse.UserEmployee;
 import com.dbms.HotelManagement.model.*;
 import com.dbms.HotelManagement.service.*;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
     private final AdminService adminService;
+    private final ServiceService serviceService;
     private final AuthenticationService authenticationService;
 
     private final DashboardService dashboardService;
@@ -25,8 +27,9 @@ public class AdminController {
     private final PhoneNoService phoneNoService;
 
     @Autowired
-    public AdminController(AdminService adminService, AuthenticationService authenticationService, DashboardService dashboardService, PasswordEncoder passwordEncoder, LeavesSalariesService leavesSalariesService, PhoneNoService phoneNoService) {
+    public AdminController(AdminService adminService, ServiceService serviceService, AuthenticationService authenticationService, DashboardService dashboardService, PasswordEncoder passwordEncoder, LeavesSalariesService leavesSalariesService, PhoneNoService phoneNoService) {
         this.adminService = adminService;
+        this.serviceService = serviceService;
         this.authenticationService = authenticationService;
         this.dashboardService = dashboardService;
         this.passwordEncoder = passwordEncoder;
@@ -167,4 +170,6 @@ public class AdminController {
         User u = dashboardService.getDetails(e.getUserID().toString());
         return u.getpEmail();
     }
+
+
 }

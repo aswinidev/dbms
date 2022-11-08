@@ -4,21 +4,29 @@ import java.util.UUID;
 
 public class ServiceUsed {
     private String serviceName;
-    private UUID customerID;
+    private UUID bookingID;
 
-    public String getDeptName() {
+    public ServiceUsed(String serviceName, UUID bookingID) {
+        this.serviceName = serviceName;
+        this.bookingID = bookingID;
+    }
+
+    public ServiceUsed() {
+    }
+
+    public String getServiceName() {
         return serviceName;
     }
 
-    public void setDeptName(String serviceName) {
+    public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
     }
 
-    public UUID getCustomerID() {
-        return customerID;
+    public UUID getBookingID() {
+        return bookingID;
     }
 
-    public void setCustomerID(UUID customerID) {
-        this.customerID = customerID;
+    public void setBookingID(UUID bookingID) {
+        this.bookingID = bookingID;
     }
 }

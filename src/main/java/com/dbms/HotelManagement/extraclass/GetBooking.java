@@ -15,10 +15,12 @@ public class GetBooking {
     private int singleRoom;
     private int doubleRoom;
     private List<Member> membersList;
+    private List<String> services;
 
     public GetBooking() {
     }
-    public GetBooking(UUID bookingID, String checkInDate, String checkOutDate, int countMember, int singleRoom, int doubleRoom, List<Member> membersList) {
+    public GetBooking(UUID bookingID, String checkInDate, String checkOutDate, int countMember, int singleRoom, int doubleRoom, List<Member> membersList, List<String> services) {
+        this.services = services;
         this.bookingID = bookingID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -26,6 +28,14 @@ public class GetBooking {
         this.singleRoom = singleRoom;
         this.doubleRoom = doubleRoom;
         this.membersList = membersList;
+    }
+
+    public List<String> getServices() {
+        return services;
+    }
+
+    public void setServices(List<String> services) {
+        this.services = services;
     }
 
     public UUID getBookingID() {
