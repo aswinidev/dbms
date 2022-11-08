@@ -21,7 +21,8 @@ public class FeedbackRepository {
 
     public List<Feedback> getAllFeedback() {
         String sql = "SELECT * FROM Feedback";
-        List<Feedback> allFeedback = jdbcTemplate.query(sql, new Object[]{}, new BeanPropertyRowMapper<>(Feedback.class));
+        List<Feedback> allFeedback = jdbcTemplate.query(sql, new Object[]{}, FeedbackMapper());
+        System.out.println(allFeedback.get(0).getfDate());
         return allFeedback;
     }
 
@@ -36,9 +37,9 @@ public class FeedbackRepository {
                     UUID.fromString(resultSet.getString("feedbackID")),
                     resultSet.getString("reviews"),
                     resultSet.getString("suggestions"),
-                    resultSet.getString("date"),
-                    resultSet.getString("time"),
-                    UUID.fromString(resultSet.getString("customerID"))
+                    resultSet.getDate("fDate").toString(),
+                    resultSet.getTime("fTime").toString(),
+                    UUID.fromString(resultSet.getString("bookingID"))
             );
         };
     }
