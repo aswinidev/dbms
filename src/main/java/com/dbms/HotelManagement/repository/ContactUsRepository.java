@@ -1,9 +1,11 @@
 package com.dbms.HotelManagement.repository;
 
 import com.dbms.HotelManagement.model.ContactUs;
+import com.dbms.HotelManagement.model.Feedback;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,5 +43,31 @@ public class ContactUsRepository {
     public void submitQuery(UUID queryID, String name, String contactNumber, String reply, String query, String emailID, UUID customerID) {
         String sql = "INSERT INTO ContactUs (queryID, name, contactNumber, reply, query, emailID, qdate, qtime, customerID) VALUES (?,?,?,?,?,?,current_date,current_time,?)";
         jdbcTemplate.update(sql, queryID.toString(), name, contactNumber, reply, query, emailID, customerID.toString());
+    }
+
+    public List<ContactUs> getRepliedQuery(UUID customerID) {
+        String sql = "SELECT * FROM ContactUs WHERE customerID = ? AND reply IS NOT NULL";
+        return jdbcTemplate.query(sql, new Object[]{customerID.toString()}, ContactUsMapper());
+    }
+
+    public List<ContactUs> getnullQuery(UUID customerID) {
+        String sql = "SELECT * FROM ContactUs WHERE customerID = ? AND reply IS NULL";
+        return jdbcTemplate.query(sql, new Object[]{customerID.toString()}, ContactUsMapper());
+    }
+
+    private RowMapper<ContactUs> ContactUsMapper() {
+        return (resultSet, i) -> {
+            return new ContactUs(
+                    UUID.fromString(resultSet.getString("queryID")),
+                    resultSet.getString("name"),
+                    resultSet.getString("contactNumber"),
+                    resultSet.getString("reply"),
+                    resultSet.getString("query"),
+                    resultSet.getString("emailID"),
+                    resultSet.getDate("qDate").toString(),
+                    resultSet.getTime("qTime").toString(),
+                    UUID.fromString(resultSet.getString("customerID"))
+            );
+        };
     }
 }
