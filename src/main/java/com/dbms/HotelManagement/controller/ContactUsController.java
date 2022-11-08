@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -50,5 +51,17 @@ public class ContactUsController {
         UUID customerID = cust.getCustomerID();
         contactUsService.addQuery(queryID,name,contactNumber,reply,query,emailID,customerID);
         return "Asked query";
+    }
+
+    @PostMapping("/contactus/repliedQuery")
+    public List<ContactUs> repliedQuery(@RequestBody ContactUs contactUs) {
+        System.out.println(contactUs.getCustomerID());
+        return contactUsService.getRepliedQuery(contactUs.getCustomerID());
+    }
+
+    @PostMapping("/contactus/nullQuery")
+    public List<ContactUs> nullQuery(@RequestBody ContactUs contactUs) {
+        System.out.println(contactUs.getCustomerID());
+        return contactUsService.getnullQuery(contactUs.getCustomerID());
     }
 }

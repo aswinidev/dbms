@@ -43,6 +43,7 @@ public class AdminService {
     }
 
     public List<Feedback> getFeedback() {
+        System.out.println("reached");
         return feedbackRepository.getAllFeedback();
     }
 //
