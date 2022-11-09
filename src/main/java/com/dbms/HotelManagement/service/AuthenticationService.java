@@ -49,4 +49,8 @@ public class AuthenticationService {
         User user = userRepository.getUser(pEmail);
         return user;
     }
+
+    public boolean userExist(String pEmail) {
+        return userRepository.userExist(pEmail);
+    }
 }

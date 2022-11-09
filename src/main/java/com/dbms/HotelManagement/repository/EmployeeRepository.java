@@ -89,6 +89,7 @@ public class EmployeeRepository {
 
     private RowMapper<UserEmployee> UserEmployeeMapper() {
         return (resultSet, i) -> {
+            System.out.println(resultSet.getInt("salary"));
             return new UserEmployee(
                     UUID.fromString(resultSet.getString("empID")),
                     resultSet.getString("houseNo"),

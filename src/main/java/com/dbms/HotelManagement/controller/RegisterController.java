@@ -40,8 +40,16 @@ public class RegisterController {
         System.out.println(aadharNo);
         String alterEmail = user.getAlternateEmailAddress();
         System.out.println(aadharNo);
-        authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
-        authenticationService.registerCustomer(customerID, alterEmail, aadharNo, userID);
-        return fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender;
+        if(authenticationService.userExist(pEmail)){
+            System.out.println("HELLO ");
+            return "fail";
+//            ERROR;
+        }
+        else{
+            authenticationService.register(userID, fname, lname, pEmail, pswd, houseNo, state, city, country, pinCode, gender);
+            authenticationService.registerCustomer(customerID, alterEmail, aadharNo, userID);
+            return fname + " " + lname + " " + pEmail + " " + pswd + " " + houseNo + " " + state + " " + city + " " + country + " " + pinCode + " " + gender;
+
+        }
     }
 }

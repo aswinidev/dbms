@@ -19,8 +19,8 @@ public class GetBooking {
 
     public GetBooking() {
     }
+
     public GetBooking(UUID bookingID, String checkInDate, String checkOutDate, int countMember, int singleRoom, int doubleRoom, List<Member> membersList, List<String> services) {
-        this.services = services;
         this.bookingID = bookingID;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -28,6 +28,7 @@ public class GetBooking {
         this.singleRoom = singleRoom;
         this.doubleRoom = doubleRoom;
         this.membersList = membersList;
+        this.services = services;
     }
 
     public List<String> getServices() {

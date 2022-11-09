@@ -1,21 +1,23 @@
 package com.dbms.HotelManagement.service;
 
 import com.dbms.HotelManagement.model.ServiceUsed;
+import com.dbms.HotelManagement.repository.BookingRepository;
 import com.dbms.HotelManagement.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class ServiceService {
     private final ServiceRepository serviceRepository;
+    private final BookingRepository bookingRepository;
 
     @Autowired
-    public ServiceService(ServiceRepository serviceRepository) {
+    public ServiceService(ServiceRepository serviceRepository, BookingRepository bookingRepository) {
         this.serviceRepository = serviceRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     public int addService(String serviceName, int price, boolean isAvail, UUID head){
@@ -52,5 +54,9 @@ public class ServiceService {
             services += ", ";
         }
         return services;
+    }
+
+    public int getPrice(UUID bookingID) {
+        return serviceRepository.serviceCost(bookingID);
     }
 }

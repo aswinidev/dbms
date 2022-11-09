@@ -12,8 +12,9 @@ public class GenerateBill {
     private int doublePrice;
     private String fname;
     private String lname;
+    private int servicePrice;
 
-    public GenerateBill(UUID billID, UUID bookingID, int amount, int singleRoom, int doubleRoom, int singlePrice, int doublePrice, String fname, String lname) {
+    public GenerateBill(UUID billID, UUID bookingID, int amount, int singleRoom, int doubleRoom, int singlePrice, int doublePrice, String fname, String lname, int servicePrice) {
         this.billID = billID;
         this.bookingID = bookingID;
         this.amount = amount;
@@ -23,6 +24,16 @@ public class GenerateBill {
         this.doublePrice = doublePrice;
         this.fname = fname;
         this.lname = lname;
+        this.servicePrice = servicePrice;
+
+    }
+
+    public int getServicePrice() {
+        return servicePrice;
+    }
+
+    public void setServicePrice(int servicePrice) {
+        this.servicePrice = servicePrice;
     }
 
     public UUID getBillID() {

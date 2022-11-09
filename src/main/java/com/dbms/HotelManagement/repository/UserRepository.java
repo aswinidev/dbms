@@ -48,6 +48,7 @@ public class UserRepository {
 
     private RowMapper<User> UserMapper() {
         return (resultSet, i) -> {
+
             return new User(
                     UUID.fromString(resultSet.getString("userID")),
                     resultSet.getString("fname"),
@@ -78,6 +79,21 @@ public class UserRepository {
         }
         catch (Exception e){
             System.out.println(e);
+        }
+    }
+
+    public boolean userExist(String pEmail) {
+        String sql = "Select * from User where pEmail = ?";
+
+        try{
+            User u = jdbcTemplate.queryForObject(sql, new Object[]{pEmail}, new BeanPropertyRowMapper<>(User.class));
+            System.out.println(u.getUserID());
+            return true;
+        }
+        catch (Exception e){
+            System.out.println(e);
+//            System.out.println("Hwoels");
+            return false;
         }
     }
 }

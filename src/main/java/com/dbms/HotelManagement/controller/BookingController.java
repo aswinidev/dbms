@@ -71,13 +71,15 @@ public class BookingController {
         UUID bookingID = UUID.randomUUID();
         IntPrice p = bookingService.book(bookingID, customerID, checkInDate, checkOutDate, booking.getSingleRoom(), booking.getDoubleRoom());
         int r = memberService.addMember(bookingID, booking.getCountMember(), booking.getMembersList());
+
         serviceService.addusedService(booking.getServices(), bookingID);
         UUID billID = UUID.randomUUID();
         int singlePrice = p.getSinglePrice();
         int doublePrice = p.getDoublePrice();
-        int amount = singlePrice*booking.getSingleRoom() + doublePrice*booking.getDoubleRoom();
-
-        GenerateBill generateBill = new GenerateBill(billID, bookingID, amount, booking.getSingleRoom(), booking.getDoubleRoom(), singlePrice, doublePrice, user.getFname(), user.getLname());
+        int servicePrice = serviceService.getPrice(bookingID);
+        int amount = singlePrice*booking.getSingleRoom() + doublePrice*booking.getDoubleRoom() + servicePrice;
+        GenerateBill generateBill = new GenerateBill(billID, bookingID, amount, booking.getSingleRoom(), booking.getDoubleRoom(), singlePrice, doublePrice, user.getFname(), user.getLname(), servicePrice);
+        System.out.println(amount);
 //        Bill bill = new Bill(billID, bookingID, amount,)
         LocalDate date = LocalDate.now(ZoneId.of("Asia/Kolkata"));
         LocalTime time = LocalTime.now(ZoneId.of("Asia/Kolkata"));

@@ -154,6 +154,7 @@ public class AdminController {
         SalaryPhoneNo salPhone = new SalaryPhoneNo(l.getSalaryPaid(), l.getEmpID(), l.getMonth(), l.getYear(), l.getLeavesAllowed(), l.getLeavesTaken());
         String s = phoneNoService.getPhoneNo(employee.getUserID());
         salPhone.setPhoneNo(s);
+        System.out.println(salPhone.getSalaryPaid());
         return salPhone;
     }
 

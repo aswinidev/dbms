@@ -101,4 +101,9 @@ public class ServiceRepository {
         return jdbcTemplate.query(sql, new Object[]{bookingID.toString()}, new BeanPropertyRowMapper<>(ServiceUsed.class));
         
     }
+
+    public int serviceCost(UUID bookingID){
+        String sql = "Select sum(price) from Service as s, ServiceUsed as su where su.bookingID=? and s.serviceName = su.serviceName";
+        return jdbcTemplate.queryForObject(sql, new Object[]{bookingID.toString()}, Integer.class);
+    }
 }
