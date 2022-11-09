@@ -15,6 +15,18 @@ public class Items {
         this.noOfItems = noOfItems;
     }
 
+    public Items(String itemName, int noOfItems, float price, String contactNo, String supplierName) {
+        this.itemName = itemName;
+        this.noOfItems = noOfItems;
+        this.price = price;
+        this.contactNo = contactNo;
+        SupplierName = supplierName;
+    }
+
+    public Items() {
+
+    }
+
     public float getPrice() {
         return price;
     }
