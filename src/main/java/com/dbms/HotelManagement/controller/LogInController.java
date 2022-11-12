@@ -16,7 +16,6 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "https://lelotusgrand.netlify.app")
-@RequestMapping("https://lelotusgrand.herokuapp.com")
 public class LogInController {
 
     private final AuthenticationManager authenticationManager;
