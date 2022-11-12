@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "https://lelotusgrand.netlify.app")
+@RequestMapping("https://lelotusgrand.herokuapp.com")
 public class RegisterController {
     private final AuthenticationService authenticationService;
     private final PasswordEncoder passwordEncoder;
