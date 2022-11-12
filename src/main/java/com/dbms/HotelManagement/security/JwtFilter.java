@@ -30,7 +30,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 //        System.out.println(request.getHeaderNames());
-        response.setHeader("Access-Control-Allow-Origin","http://localhost:3000");
+        response.setHeader("Access-Control-Allow-Origin","https://lelotusgrand.netlify.app");
         response.setHeader("Access-Control-Allow-Headers", "*");
 //        response.setHeader("Access-Control-Expose-Headers","*");
         response.setHeader("Access-Control-Allow-Credentials","true");
