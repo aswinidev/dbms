@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://lelotusgrand.netlify.app")
 public class EmployeeController {
 
     private final EmployeeService employeeService;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://lelotusgrand.netlify.app")
 public class LogOutController {
     @GetMapping("/logout_")
     public String userLogout(){

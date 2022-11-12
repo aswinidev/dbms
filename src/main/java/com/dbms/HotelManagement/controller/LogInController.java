@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://lelotusgrand.netlify.app")
 public class LogInController {
 
     private final AuthenticationManager authenticationManager;

@@ -5,14 +5,12 @@ import com.dbms.HotelManagement.jsonResponse.ServicesEmp;
 import com.dbms.HotelManagement.model.Service;
 import com.dbms.HotelManagement.service.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "https://lelotusgrand.netlify.app")
 public class ServiceController {
     private final ServiceService serviceService;
 

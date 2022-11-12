@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://lelotusgrand.netlify.app")
 public class DashboardController {
     private final DashboardService dashboardService;
     private final AuthenticationService authenticationService;

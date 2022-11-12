@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://lelotusgrand.netlify.app")
 public class RegisterController {
     private final AuthenticationService authenticationService;
     private final PasswordEncoder passwordEncoder;
